@@ -1,5 +1,10 @@
 :host {
-    .card {
-        margin-bottom: 15px;
+    .example-card {
+        width: 400px;
+    }
+
+    .example-header-image {
+        background-image: url('http://material.angular.io/assets/img/examples/shiba1.jpg');
+        background-size: cover;
     }
 }

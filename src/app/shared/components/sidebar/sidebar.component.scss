@@ -1,4 +1,4 @@
-$topnav-background-color: #222;
+$topnav-background-color: #01579B;
 .sidebar{
     border-radius: 0;
     position: fixed;
@@ -19,7 +19,7 @@ $topnav-background-color: #222;
         -ms-transition: all 0.2s ease-in-out;
          -o-transition: all 0.2s ease-in-out;
             transition: all 0.2s ease-in-out;
-    // border-top: 1px solid rgba(255,255,255,0.3);
+    border-top: 1px solid rgba(255,255,255,0.3);
     .list-group{
         a.list-group-item {
             background: $topnav-background-color;

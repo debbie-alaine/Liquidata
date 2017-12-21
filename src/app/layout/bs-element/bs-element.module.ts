@@ -14,3 +14,4 @@ import { PageHeaderModule } from './../../shared';
     declarations: [BsElementComponent]
 })
 export class BsElementModule { }
+
