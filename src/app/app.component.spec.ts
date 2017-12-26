@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Http } from '@angular/http';
-import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 
 import { AppComponent } from './app.component';
 
@@ -13,7 +12,6 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        TranslateModule.forRoot()
       ],
       declarations: [
         AppComponent

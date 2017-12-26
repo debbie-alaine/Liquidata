@@ -1,26 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
 
-import { HeaderComponent } from './header.component';
+import { DiscountComponent } from './discount.component';
 
-describe('HeaderComponent', () => {
-  let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
+describe('DiscountComponent', () => {
+  let component: DiscountComponent;
+  let fixture: ComponentFixture<DiscountComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        TranslateModule.forRoot()
-      ],
-      declarations: [ HeaderComponent ]
+      imports: [ RouterTestingModule ],
+      declarations: [ DiscountComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeaderComponent);
+    fixture = TestBed.createComponent(DiscountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

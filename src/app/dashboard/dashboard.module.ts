@@ -4,12 +4,10 @@ import {
     NgbCarouselModule,
     NgbAlertModule
 } from '@ng-bootstrap/ng-bootstrap';
-
-
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { TimelineComponent } from './components';
-import { StatModule } from '../../shared';
+import { TimelineComponent } from './components/index';
+import { StatModule } from '../shared/index';
 
 @NgModule({
     imports: [

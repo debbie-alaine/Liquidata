@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { routerTransition } from '../../router.animations';
+import { routerTransition } from '../router.animations';
 
 @Component({
     selector: 'app-dashboard',
@@ -14,11 +14,8 @@ export class DashboardComponent implements OnInit {
         this.alerts.push({
             id: 1,
             type: 'success',
-            message: `Welcome to Liquidatum! Take some time to fill out your profile so our companies can get to know you better.`
-        },
-            {id: 2,
-            type: 'success',
-            message: 'Woo-hoo! Google approved your application.'});
+            message: `Woo-hoo! Someone approved your application!`
+        });
     }
 
     ngOnInit() {
