@@ -1,15 +1,8 @@
 <div [@routerTransition]>
-    <ngb-alert [type]="alert.type" (close)="closeAlert(alert)" *ngFor="let alert of alerts">{{ alert.message }}</ngb-alert>
-    <hr />
     <div class="row">
         <div class="col-lg-8">
             <div class="card card-default">
-                <div class="card-header">
-                    <i class="fa fa-clock-o fa-fw"></i> Your Newsfeed
-                </div>
-                <!-- /.card-header -->
                 <app-timeline></app-timeline>
-                <!-- /.card-body -->
             </div>
         </div>
     </div>

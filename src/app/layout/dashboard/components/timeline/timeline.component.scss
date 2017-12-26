@@ -23,19 +23,6 @@
 .timeline > li:after {
     content: " ";
     display: table;
-}
-
-.timeline > li:after {
-    clear: both;
-}
-
-.timeline > li:before,
-.timeline > li:after {
-    content: " ";
-    display: table;
-}
-
-.timeline > li:after {
     clear: both;
 }
 
@@ -43,7 +30,7 @@
     float: left;
     position: relative;
     width: 100%;
-    padding: 20px;
+    padding: 15px;
     border: 1px solid #d4d4d4;
     border-radius: 2px;
     -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.175);
@@ -54,44 +41,37 @@
     content: " ";
     display: inline-block;
     position: absolute;
-    top: 26px;
-    right: -15px;
-    border-top: 15px solid transparent;
-    border-right: 0 solid #ccc;
-    border-bottom: 15px solid transparent;
-    border-left: 15px solid #ccc;
 }
 
 .timeline > li > .timeline-panel:after {
     content: " ";
     display: inline-block;
     position: absolute;
-    top: 27px;
-    right: -14px;
-    border-top: 14px solid transparent;
-    border-right: 0 solid #fff;
-    border-bottom: 14px solid transparent;
-    border-left: 14px solid #fff;
 }
 
-.timeline > li > .timeline-badge {
-    z-index: 100;
-    position: absolute;
-    top: 16px;
-    left: 50%;
-    width: 50px;
-    height: 50px;
-    margin-left: -25px;
-    border-radius: 50% 50% 50% 50%;
-    text-align: center;
-    font-size: 1.4em;
-    line-height: 50px;
-    color: #fff;
-    background-color: #999999;
+.timeline-heading {
+
+    margin-bottom: 0px !important;
+
+    .timeline-time {
+        text-align: right;
+        margin-bottom: 0px !important;
+    }
+
+    .timeline-title {
+        float: left;
+        margin-bottom: 0px !important;
+    }
+}
+
+.timeline-body {
+    margin-top: 0px !important;
 }
 
 .timeline > li.timeline-inverted > .timeline-panel {
     float: right;
+    margin-top: 0;
+    color: inherit;
 }
 
 .timeline > li.timeline-inverted > .timeline-panel:before {
@@ -108,38 +88,9 @@
     border-left-width: 0;
 }
 
-.timeline-badge.primary {
-    background-color: #2e6da4 !important;
-}
-
-.timeline-badge.success {
-    background-color: #3f903f !important;
-}
-
-.timeline-badge.warning {
-    background-color: #f0ad4e !important;
-}
-
-.timeline-badge.danger {
-    background-color: #d9534f !important;
-}
-
-.timeline-badge.info {
-    background-color: #5bc0de !important;
-}
-
-.timeline-title {
-    margin-top: 0;
-    color: inherit;
-}
-
 .timeline-body > p,
 .timeline-body > ul {
     margin-bottom: 0;
-}
-
-.timeline-body > p + p {
-    margin-top: 5px;
 }
 
 @media(max-width:767px) {
