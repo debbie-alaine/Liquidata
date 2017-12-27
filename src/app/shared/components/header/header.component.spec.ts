@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { TranslateModule } from '@ngx-translate/core';
-
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -10,9 +9,9 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
+        imports: [
         RouterTestingModule,
-        TranslateModule.forRoot()
+          NgbDropdownModule.forRoot()
       ],
       declarations: [ HeaderComponent ]
     })
