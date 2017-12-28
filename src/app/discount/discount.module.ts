@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { DiscountRoutingModule } from './discount-routing.module';
 import { DiscountComponent } from './discount.component';
-import { TablesComponent } from '../layout/tables/tables.component';
 
 @NgModule({
   imports: [
@@ -11,8 +10,7 @@ import { TablesComponent } from '../layout/tables/tables.component';
     DiscountRoutingModule
   ],
   declarations: [
-      DiscountComponent,
-      TablesComponent
+      DiscountComponent
   ]
 })
 export class DiscountModule { }
