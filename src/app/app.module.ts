@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { HeaderComponent } from './shared/index';
+import { DatahubComponent } from './datahub/datahub.component';
 
 @NgModule({
     declarations: [

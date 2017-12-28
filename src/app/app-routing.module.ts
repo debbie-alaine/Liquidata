@@ -12,6 +12,7 @@ const routes: Routes = [
     },
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'discounts', loadChildren: './discount/discount.module#DiscountModule' },
+    { path: 'datahub', loadChildren: './datahub/datahub.module#DatahubModule' },
     { path: 'history', loadChildren: './history/history.module#HistoryModule' },
     { path: 'signup', loadChildren: './signup/signup.module#SignupModule' },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
