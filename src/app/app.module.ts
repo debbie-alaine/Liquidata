@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Http, HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { HeaderComponent } from './shared/index';
-import { DatahubComponent } from './datahub/datahub.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
@@ -18,8 +17,8 @@ import { DatahubComponent } from './datahub/datahub.component';
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
-        HttpModule,
         AppRoutingModule,
+        NgbDropdownModule.forRoot()
     ],
     providers: [AuthGuard],
     bootstrap: [AppComponent]

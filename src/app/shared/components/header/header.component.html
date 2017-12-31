@@ -1,35 +1,41 @@
-    <nav class="navbar navbar-inverse navbar-toggleable-md navbar-light bg-faded">
+    <nav class="navbar navbar-inverse navbar-toggleable-md">
             <img class="navbar-brand" src="assets/images/logo2.png"/>
             <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav mr-auto mt-2 mt-md-0">&nbsp;
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/dashboard']" [routerLinkActive]="['router-link-active']">
-                    <i class="fa fa-home"></i>&nbsp;{{ 'Home' }}
-                </a>
+                    <i class="fa fa-home"></i> Home
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/discounts']" [routerLinkActive]="['router-link-active']">
-                    <i class="fa fa-tags"></i>&nbsp;{{ 'Discounts' }}
-                </a>
+                    <i class="fa fa-tags"></i>&nbsp;Discounts
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/datahub']" [routerLinkActive]="['router-link-active']">
-                    <i class="fa fa-cubes"></i>&nbsp;{{ 'DataHub' }}
-                </a>
+                    <i class="fa fa-cubes"></i>&nbsp;DataHub
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/history']" [routerLinkActive]="['router-link-active']">
-                    <i class="fa fa-history"></i>&nbsp;{{ 'History' }}
-                </a>
+                    <i class="fa fa-history"></i>&nbsp;History
+                    </a>
                 </li>
-                <li class="nav-item dropdown navbar-toggler-right" ngbDropdown>
-                    <a href="javascript:void(0);" class="nav-link dropdown-toggle" ngbDropdownToggle>
+                <li class="nav-item dropdown navbar-toggler-right" ngbDropdown="">
+                    <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                         <i class="fa fa-user"></i> John Smith <b class="caret"></b>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu>
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-fw fa-user"></i> {{ 'Profile' }}</a>
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-fw fa-gear"></i> {{ 'Settings' }}</a>
-                        <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()"><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' }} </a>
+                    <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu="">
+                        <a class="dropdown-item" href="javascript:void(0)">
+                            <i class="fa fa-fw fa-user"></i> Profile
+                        </a>
+                        <a class="dropdown-item" href="javascript:void(0)">
+                            <i class="fa fa-fw fa-gear"></i> Settings
+                        </a>
+                        <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
+                            <i class="fa fa-fw fa-power-off"></i> Log Out
+                        </a>
                     </div>
                 </li>
             </ul>
