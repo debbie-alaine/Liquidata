@@ -11,7 +11,16 @@ export class HeaderComponent implements OnInit {
     constructor(public router: Router) {
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
+
+    showHeader() {
+        if (this.router.url === '/login' || this.router.url === '/signup') {
+            return false;
+        }
+
+        return true;
+    }
 
     onLoggedout() {
         localStorage.removeItem('isLoggedin');
