@@ -16,6 +16,7 @@ const routes: Routes = [
     { path: 'history', loadChildren: './history/history.module#HistoryModule' },
     { path: 'signup', loadChildren: './signup/signup.module#SignupModule' },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
+    { path: 'profile', loadChildren: './profile-page/profile.module#ProfilePageModule' },
     { path: '**', redirectTo: 'not-found' }
 ];
 

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { HeaderComponent } from './shared/index';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
     declarations: [
