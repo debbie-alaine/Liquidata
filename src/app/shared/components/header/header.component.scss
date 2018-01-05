@@ -1,6 +1,9 @@
 $topnav-background-color: #01579B;
 .navbar {
     background: $topnav-background-color !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
 }
 
 .navbar-brand {
@@ -13,6 +16,8 @@ $topnav-background-color: #01579B;
 }
 
 .nav>li a {
+    padding-top: 12px;
+    padding-bottom: 13px;
     border: 0;
     border-radius: 0;
     color: #999;
@@ -28,4 +33,11 @@ $topnav-background-color: #01579B;
 .nav>li a.router-link-active {
     background: darken($topnav-background-color, 5%);
     color: #fff;
+}
+
+.nav>.dropdown>.dropdown-menu>.dropdown-item{
+    text-align: left;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 8px;
 }
