@@ -5,9 +5,9 @@
         <form class="form-signin">
             <span id="reauth-email" class="reauth-email"></span>
             <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required autofocus>
             <button class="btn btn-lg btn-primary btn-block btn-signin" [routerLink]="['/dashboard']" (click)="onLoggedin()"> Log in </button>
-            <button class="btn btn-lg btn-primary btn-block btn-signin" [routerLink]="['/signup']">Register</button>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" [routerLink]="['/signup']">Sign Up</button>
         </form><!-- /form -->
     </div><!-- /card-container -->
 </div><!-- /container -->
