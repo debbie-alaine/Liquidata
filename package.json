@@ -1,7 +1,8 @@
 {
   "name": "liquidatum-cli-update",
   "version": "0.0.0",
-  "license": "MIT",
+  "description": "The Liquidatum Platform",
+  "author": "Deborah Sandoval",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ec true --port 4201",
@@ -12,7 +13,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/schematics": "0.0.40",
+    "@angular-devkit/schematics": "0.0.42",
     "@angular/animations": "^5.1.2",
     "@angular/cdk": "^5.0.2",
     "@angular/common": "^5.1.2",
@@ -29,8 +30,13 @@
     "@ngx-translate/http-loader": "^2.0.1",
     "core-js": "^2.5.1",
     "font-awesome": "^4.7.0",
-    "rxjs": "^5.4.3",
-    "zone.js": "^0.8.17"
+    "rxjs": "^5.5.2",
+    "zone.js": "^0.8.17",
+    "express": "~4.7.2",
+    "mongoose": "~3.6.2",
+    "morgan": "~1.2.2",
+    "body-parser": "~1.5.2",
+    "method-override": "~2.1.2"
   },
   "devDependencies": {
     "@angular/cli": "^1.4.1",
@@ -50,7 +56,7 @@
     "protractor": "~5.2.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.8.0",
-    "typescript": "~2.6.2",
+    "typescript": "2.4.2",
     "webpack": "^3.10.0"
   }
 }
