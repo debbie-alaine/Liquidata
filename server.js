@@ -1,24 +1,70 @@
-// server.js
+const express = require('express');
+var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
+var mysql = require('mysql');
+var db = require('./db');
+var config = require('./config');
 
-// set up ========================
-var express  = require('express');
-var app      = express();                               // create our app w/ express
-var mongoose = require('mongoose');                     // mongoose for mongodb
-var morgan = require('morgan');             // log requests to the console (express4)
-var bodyParser = require('body-parser');    // pull information from HTML POST (express4)
-var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
+var con = mysql.createConnection({
+    host: config.db.host,
+    port: config.db.port,
+    database: config.db.database,
+    user: config.db.user,
+    password: config.db.password
+});
 
-// configuration =================
+con.connect(function(err) {
+    if (err) {
+        console.log("Unable to connect to database: " + err);
+        throw err;
+    }
+    else {
+        console.log("Connected to database!");
+        global.database = con;
+    }
+});
 
-mongoose.connect('mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu');     // connect to mongoDB database on modulus.io
+// Configure the local strategy for use by Passport.
+//
+// The local strategy require a `verify` function which receives the credentials
+// (`username` and `password`) submitted by the user.  The function must verify
+// that the password is correct and then invoke `cb` with a user object, which
+// will be set at `req.user` in route handlers after authentication.
+passport.use(new Strategy(
+    function(username, password, cb) {
+        db.users.findByUsername(username, function(err, user) {
+            if (err) { return cb(err); }
+            if (!user) { return cb(null, false); }
+            if (user.password !== password) { return cb(null, false); }
+            return cb(null, user);
+        });
+    }));
 
-app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
-app.use(morgan('dev'));                                         // log every request to the console
-app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
-app.use(bodyParser.json());                                     // parse application/json
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
-app.use(methodOverride());
+// Configure Passport authenticated session persistence.
+//
+// In order to restore authentication state across HTTP requests, Passport needs
+// to serialize users into and deserialize users out of the session.  The
+// typical implementation of this is as simple as supplying the user ID when
+// serializing, and querying the user record by ID from the database when
+// deserializing.
+passport.serializeUser(function(user, cb) {
+    cb(null, user.id);
+});
 
-// listen (start app with node server.js) ======================================
-app.listen(8080);
-console.log("App listening on port 8080");
+passport.deserializeUser(function(id, cb) {
+    db.users.findById(id, function (err, user) {
+        if (err) { return cb(err); }
+        cb(null, user);
+    });
+});
+
+const app = express();
+
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.listen(3000, function () {
+    console.log('App listening on port 3000...');
+});
