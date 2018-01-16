@@ -1,69 +1,56 @@
-const express = require('express');
+var express = require('express');
 var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
-var mysql = require('mysql');
-var db = require('./db');
-var config = require('./config');
+var LocalStrategy = require('passport-local').Strategy;
+var bodyParser = require('body-parser');
+var path = require('path');
+var findByUsername = require('./db/user').findByUsername;
 
-var con = mysql.createConnection({
-    host: config.db.host,
-    port: config.db.port,
-    database: config.db.database,
-    user: config.db.user,
-    password: config.db.password
-});
+// Use express
+var app = express();
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use(require('cookie-parser')());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 
-con.connect(function(err) {
-    if (err) {
-        console.log("Unable to connect to database: " + err);
-        throw err;
-    }
-    else {
-        console.log("Connected to database!");
-        global.database = con;
-    }
-});
-
-// Configure the local strategy for use by Passport.
-//
-// The local strategy require a `verify` function which receives the credentials
-// (`username` and `password`) submitted by the user.  The function must verify
-// that the password is correct and then invoke `cb` with a user object, which
-// will be set at `req.user` in route handlers after authentication.
-passport.use(new Strategy(
-    function(username, password, cb) {
-        db.users.findByUsername(username, function(err, user) {
-            if (err) { return cb(err); }
-            if (!user) { return cb(null, false); }
-            if (user.password !== password) { return cb(null, false); }
-            return cb(null, user);
+// Use passport to authenticate
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        findByUsername(username, password, function(err, user) {
+            if (err) {
+                return done(err);
+            }
+            else {
+                return done(null, user);
+            }
         });
     }));
 
-// Configure Passport authenticated session persistence.
-//
-// In order to restore authentication state across HTTP requests, Passport needs
-// to serialize users into and deserialize users out of the session.  The
-// typical implementation of this is as simple as supplying the user ID when
-// serializing, and querying the user record by ID from the database when
-// deserializing.
-passport.serializeUser(function(user, cb) {
-    cb(null, user.id);
+passport.serializeUser(function(user, done) {
+    done(null, user);
 });
 
-passport.deserializeUser(function(id, cb) {
-    db.users.findById(id, function (err, user) {
-        if (err) { return cb(err); }
-        cb(null, user);
-    });
+passport.deserializeUser(function(user, done) {
+    done(null, user);
 });
 
-const app = express();
-
-// Initialize Passport and restore authentication state, if any, from the
-// session.
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Define routes.
+app.post('/login',
+    passport.authenticate('local', { failureRedirect: '/login' }),
+    function(req, res) {
+        console.log("/login authenticated...");
+        console.log(req.user);
+        res.redirect('/dashboard');
+    });
+
+// Catch all...
+
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
 app.listen(3000, function () {
     console.log('App listening on port 3000...');

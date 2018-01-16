@@ -2,12 +2,12 @@
     <div class="card card-container">
         <img src="assets/images/logo.png" class="logo-avatar" />
         <br>
-        <form class="form-signin">
+        <form class="form-signin" action="/login" method="POST">
             <span id="reauth-email" class="reauth-email"></span>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required autofocus>
-            <button class="btn btn-lg btn-primary btn-block btn-signin" [routerLink]="['/dashboard']" (click)="onLoggedin()"> Log in </button>
-            <button class="btn btn-lg btn-primary btn-block btn-signin" [routerLink]="['/signup']">Sign Up</button>
+            <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+            <input type="password" name="password" class="form-control" placeholder="Password" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block btn-signin">Log in </button>
         </form><!-- /form -->
+        <button class="btn btn-lg btn-primary btn-block btn-signin" [routerLink]="['/signup']">Sign Up</button>
     </div><!-- /card-container -->
 </div><!-- /container -->
