@@ -1,57 +1,16 @@
-var express = require('express');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var bodyParser = require('body-parser');
-var path = require('path');
-var findByUsername = require('./db/user').findByUsername;
+const express = require('express');
+const app = express();
+const path = require('path');
 
-// Use express
-var app = express();
-app.use(express.static(path.join(__dirname, 'dist')));
-app.use(require('cookie-parser')());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use('/', express.static(__dirname +  '/'));
 
-// Use passport to authenticate
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        findByUsername(username, password, function(err, user) {
-            if (err) {
-                return done(err);
-            }
-            else {
-                return done(null, user);
-            }
-        });
-    }));
-
-passport.serializeUser(function(user, done) {
-    done(null, user);
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
-passport.deserializeUser(function(user, done) {
-    done(null, user);
-});
+const hostname = '0.0.0.0';
+const port = 3000;
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Define routes.
-app.post('/login',
-    passport.authenticate('local', { failureRedirect: '/login' }),
-    function(req, res) {
-        console.log("/login authenticated...");
-        console.log(req.user);
-        res.redirect('/dashboard');
-    });
-
-// Catch all...
-
-app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
-
-app.listen(3000, function () {
-    console.log('App listening on port 3000...');
+app.listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
 });

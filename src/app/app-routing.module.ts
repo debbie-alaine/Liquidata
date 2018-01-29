@@ -1,22 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './shared';
+import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
+
 
 const routes: Routes = [
-    {
-       path: '', redirectTo: 'dashboard', pathMatch: 'full'
-    },
-    {
-        path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule',
-        canActivate: [AuthGuard]
-    },
-    { path: 'login', loadChildren: './login/login.module#LoginModule' },
-    { path: 'discounts', loadChildren: './discount/discount.module#DiscountModule' },
-    { path: 'datahub', loadChildren: './datahub/datahub.module#DatahubModule' },
-    { path: 'history', loadChildren: './history/history.module#HistoryModule' },
-    { path: 'signup', loadChildren: './signup/signup.module#SignupModule' },
+    { path: '', redirectTo: 'splash', pathMatch: 'full'},
+    { path: 'splash', loadChildren: './splash/splash.module#SplashModule'},
+    { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard]},
+    { path: 'discounts', loadChildren: './discount/discount.module#DiscountModule', canActivate: [AuthGuard] },
+    { path: 'datahub', loadChildren: './datahub/datahub.module#DatahubModule', canActivate: [AuthGuard] },
+    { path: 'history', loadChildren: './history/history.module#HistoryModule', canActivate: [AuthGuard] },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
-    { path: 'profile', loadChildren: './profile-page/profile.module#ProfilePageModule' },
+    { path: 'profile', loadChildren: './profile-page/profile.module#ProfilePageModule', canActivate: [AuthGuard] },
     { path: '**', redirectTo: 'not-found' }
 ];
 

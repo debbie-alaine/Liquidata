@@ -4,10 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthGuard } from './shared';
 import { HeaderComponent } from './shared/index';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt'
+import {AuthService} from './auth/auth.service';
+import {AuthGuardService} from './auth/auth-guard.service';
 
 @NgModule({
     declarations: [
@@ -15,14 +17,26 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
         HeaderComponent
     ],
     imports: [
+        HttpClientModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         AppRoutingModule,
-        NgbDropdownModule.forRoot()
+        NgbDropdownModule.forRoot(),
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: () => {
+                    return localStorage.getItem('access_token');
+                },
+                whitelistedDomains: ['http://localhost:4201']
+            }
+        })
     ],
-    providers: [AuthGuard],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    providers: [
+        AuthService,
+        AuthGuardService
+    ]
 })
 
 export class AppModule {

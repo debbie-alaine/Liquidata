@@ -6,7 +6,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { TimelineComponent } from './components/index';
+import { TimelineComponent } from './components/timeline/timeline.component';
 import { StatModule } from '../shared/index';
 
 @NgModule({
@@ -22,4 +22,6 @@ import { StatModule } from '../shared/index';
         TimelineComponent
     ]
 })
-export class DashboardModule { }
+export class DashboardModule {
+    constructor() { }
+}
