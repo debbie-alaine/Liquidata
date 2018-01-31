@@ -1,7 +1,7 @@
 {
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "project": {
-        "name": "liquidatum-angular4-bootstrap4"
+        "name": "liquidata-angular4-bootstrap4"
     },
     "apps": [
         {

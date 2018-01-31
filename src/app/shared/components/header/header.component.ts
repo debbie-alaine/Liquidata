@@ -17,6 +17,10 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
     }
 
+    public showHeader() {
+        return true;
+    }
+
     public logout() {
         this.auth.logout();
         this.router.navigate(['/splash'])}

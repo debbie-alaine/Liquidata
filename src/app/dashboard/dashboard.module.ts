@@ -8,6 +8,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { StatModule } from '../shared/index';
+import {HeaderComponent} from '../shared/components';
 
 @NgModule({
     imports: [
@@ -17,10 +18,7 @@ import { StatModule } from '../shared/index';
         DashboardRoutingModule,
         StatModule
     ],
-    declarations: [
-        DashboardComponent,
-        TimelineComponent
-    ]
+    declarations: [DashboardComponent, TimelineComponent, HeaderComponent]
 })
 export class DashboardModule {
     constructor() { }

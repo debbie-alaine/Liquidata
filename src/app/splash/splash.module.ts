@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SplashRoutingModule } from './splash-routing.module';
 import { SplashComponent } from './splash.component';
+import {HeaderComponent} from '../shared/components';
 
 @NgModule({
     imports: [
@@ -12,3 +13,4 @@ import { SplashComponent } from './splash.component';
     declarations: [SplashComponent]
 })
 export class SplashModule { }
+

@@ -1,0 +1,90 @@
+.navbar {
+        background: transparent;
+        background-image: none;
+        border-color: transparent;
+        box-shadow: none;
+}
+
+.navbar-brand {
+    width: 100px;
+}
+
+.nav>li {
+    float: right;
+    //display: inline-block;
+}
+
+.nav>li a {
+    padding-top: 12px;
+    padding-bottom: 13px;
+    border: 0;
+    border-radius: 0;
+    color: #999;
+    text-decoration: none;
+    text-align: center;
+    float: right;
+}
+
+.nav>li a:hover {
+    color: #fff;
+}
+
+.nav>li a.router-link-active {
+    color: #fff;
+}
+
+@mixin dark-overlay{
+    &:after{
+        content: "";
+        width: 100%;
+        height: auto;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+    }
+}
+
+.bg {
+    margin-top: 0;
+    padding-top: 15%;
+    padding-bottom: 15%;
+    background: url("../../assets/images/pexels.png") center no-repeat;
+    background-size: cover;
+    position: relative;
+    height: 50%;
+    z-index: 0;
+    @include dark-overlay;
+}
+
+.bg:after{
+    background:rgba(0, 0, 0, 0.75);
+}
+
+#description {
+    padding: 50px 0;
+}
+
+#visual-section {
+    padding: 50px 0;
+    background-color: #2859c8;
+}
+
+.logo-avatar {
+    height: 120px;
+}
+
+.header {
+    text-align: right;
+    margin-right: 50px;
+
+    h1 {
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 60px;
+        font-weight: bold;
+        letter-spacing: -1px;
+        line-height: 1;
+    }
+}

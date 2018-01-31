@@ -13,7 +13,7 @@ export class AuthService {
         responseType: environment.auth0.responseType,
         audience: environment.auth0.audience,
         redirectUri: environment.auth0.redirectUri,
-        scope: environment.auth0.scope
+        scope: environment.auth0.scope,
     });
 
     constructor(public router: Router) {}
