@@ -1,12 +1,6 @@
-<nav class="navbar navbar-toggleable-md navbar-expand-lg fixed-top">
-    <img class="navbar-brand" src="assets/images/logo2.png"/>
-    <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav navbar-toggler-right">
-            <li class="nav-item">
-                <button class="btn btn-outline-primary" (click)="login()"> Login or Sign Up </button>
-            </li>
-        </ul>
-    </div>
+<nav class="navbar navbar-toggleable-md navbar-expand-lg fixed-top" [ngStyle]="navStyle">
+    <img class="navbar-brand" src="./assets/images/logo2.png"/>
+    <button class="btn btn-primary" (click)="login()"> <i class="fa fa-lock"></i> Log In </button>
 </nav>
 <div class="bg">
     <div class="container text-white header">
@@ -20,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h2>Interesting stuff will go here...</h2>
+                <h2>This site is under construction! <i class="fa fa-wrench"></i></h2>
                 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
             </div>
         </div>
@@ -31,7 +25,7 @@
     <div class="container text-white">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <i class="fa fa-cubes fa-5x" aria-hidden="true"></i>
+                <h2> <i class="fa fa-cubes" aria-hidden="true"></i> Check back again soon!</h2>
                 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
             </div>
         </div>

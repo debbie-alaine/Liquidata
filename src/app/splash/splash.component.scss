@@ -11,7 +11,7 @@
 
 .nav>li {
     float: right;
-    //display: inline-block;
+    display: inline-block;
 }
 
 .nav>li a {
@@ -60,7 +60,7 @@
 }
 
 .bg:after{
-    background:rgba(0, 0, 0, 0.75);
+    background:rgba(0, 0, 0, 0.50);
 }
 
 #description {
@@ -73,7 +73,7 @@
 }
 
 .logo-avatar {
-    height: 120px;
+    height: 100px;
 }
 
 .header {
@@ -88,3 +88,10 @@
         line-height: 1;
     }
 }
+
+.btn {
+    position: absolute;
+    right: 20px;
+    font-size: 12px;
+}
+
