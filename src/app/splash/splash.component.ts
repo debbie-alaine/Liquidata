@@ -30,9 +30,9 @@ export class SplashComponent implements OnInit {
     onWindowScroll() {
         const number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
         if (number > 45) {
-            this.navStyle = {'background': 'white', 'transition': 'background 2s'};
+            this.navStyle = {'background': 'white', 'transition': 'background 1s'};
         } else {
-            this.navStyle = {'background': 'transparent', 'transition': 'background 2s'};
+            this.navStyle = {'background': 'transparent', 'transition': 'background 1s'};
         }
     }
 

@@ -5,17 +5,19 @@ import {
     NgbAlertModule
 } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileRoutingModule } from './profile-routing.module';
-import { ProfilePageComponent } from './profile-page.component';
+import { ProfileComponent } from './profile.component';
+import {HeaderModule} from '../shared/components/header/header.module';
 
 @NgModule({
     imports: [
         CommonModule,
         NgbCarouselModule.forRoot(),
         NgbAlertModule.forRoot(),
-        ProfileRoutingModule
+        ProfileRoutingModule,
+        HeaderModule
     ],
     declarations: [
-        ProfilePageComponent,
+        ProfileComponent,
     ]
 })
-export class ProfilePageModule { }
+export class ProfileModule { }

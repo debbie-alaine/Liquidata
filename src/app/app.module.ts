@@ -4,11 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt'
 import {AuthService} from './auth/auth.service';
 import {AuthGuardService} from './auth/auth-guard.service';
+import {HeaderModule} from './shared/components/header/header.module';
+import { CollapseModule } from 'ngx-bootstrap';
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import {AuthGuardService} from './auth/auth-guard.service';
         BrowserAnimationsModule,
         FormsModule,
         AppRoutingModule,
-        NgbDropdownModule.forRoot(),
+        HeaderModule,
+        CollapseModule.forRoot(),
         JwtModule.forRoot({
             config: {
                 tokenGetter: () => {

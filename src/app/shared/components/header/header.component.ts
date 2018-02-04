@@ -10,15 +10,13 @@ import {AuthService} from '../../../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+    isCollapsed = true;
+
     constructor(public router: Router, private auth: AuthService) {
 
     }
 
     ngOnInit() {
-    }
-
-    public showHeader() {
-        return true;
     }
 
     public logout() {

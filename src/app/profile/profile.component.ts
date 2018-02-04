@@ -3,11 +3,11 @@ import { routerTransition } from '../router.animations';
 
 @Component({
   selector: 'app-profile-page',
-  templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.scss'],
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss'],
     animations: [routerTransition()]
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   constructor() { }
 

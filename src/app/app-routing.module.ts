@@ -11,7 +11,7 @@ const routes: Routes = [
     { path: 'datahub', loadChildren: './datahub/datahub.module#DatahubModule', canActivate: [AuthGuard] },
     { path: 'history', loadChildren: './history/history.module#HistoryModule', canActivate: [AuthGuard] },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
-    { path: 'profile', loadChildren: './profile-page/profile.module#ProfilePageModule', canActivate: [AuthGuard] },
+    { path: 'profile', loadChildren: './profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
     { path: '**', redirectTo: 'not-found' }
 ];
 
