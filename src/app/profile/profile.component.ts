@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../router.animations';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -9,9 +10,16 @@ import { routerTransition } from '../router.animations';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+    profile: any;
 
-  ngOnInit() {
-  }
+    constructor(public auth: AuthService) { }
 
+    ngOnInit() {
+        if (this.auth.userProfile) {
+            this.profile = this.auth.userProfile;
+        } else {
+            this.auth.getProfile();
+            this.profile = this.auth.userProfile;
+        }
+    }
 }

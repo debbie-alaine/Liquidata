@@ -16,7 +16,10 @@ export class AuthService {
         scope: environment.auth0.scope,
     });
 
-    constructor(public router: Router) {}
+    userProfile: any;
+
+    constructor(public router: Router) {
+    }
 
     public login(): void {
         this.auth0.authorize();
@@ -28,7 +31,7 @@ export class AuthService {
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
         // Go back to the home route
-        this.router.navigate(['/login']);
+        this.router.navigate(['/splash']);
     }
 
     public handleAuthentication(): void {
@@ -36,6 +39,7 @@ export class AuthService {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 window.location.hash = '';
                 this.setSession(authResult);
+                this.getProfile();
                 this.router.navigate(['/dashboard']);
             } else if (err) {
                 this.router.navigate(['/dashboard']);
@@ -50,6 +54,19 @@ export class AuthService {
         localStorage.setItem('access_token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
+    }
+
+    public getProfile(): void {
+        const accessToken = localStorage.getItem('access_token');
+        if (!accessToken) {
+            throw new Error('Access Token must exist to fetch profile');
+        }
+
+        this.auth0.client.userInfo(accessToken, (err, profile) => {
+            if (profile) {
+                this.userProfile = profile;
+            }
+        });
     }
 
     public isAuthenticated(): boolean {

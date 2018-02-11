@@ -25,10 +25,10 @@ import { CollapseModule } from 'ngx-bootstrap';
         CollapseModule.forRoot(),
         JwtModule.forRoot({
             config: {
-                tokenGetter: () => {
+                tokenGetter() {
                     return localStorage.getItem('access_token');
                 },
-                whitelistedDomains: ['http://localhost:4201']
+                whitelistedDomains: ['http://liquidatarewards.com']
             }
         })
     ],
