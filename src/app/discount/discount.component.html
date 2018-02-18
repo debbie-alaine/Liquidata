@@ -14,15 +14,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Apple</td>
-                            <td>25% Off Headphones</td>
-                            <td>G7TQRS</td>
-                        </tr>
-                        <tr>
-                            <td>AMC</td>
-                            <td>$5.00 off movie tickets</td>
-                            <td>O7R3QL</td>
+                        <tr *ngFor="let discount of discounts">
+                            <td>{{discount.company}}</td>
+                            <td>{{discount.description}}</td>
+                            <td>{{discount.code}}</td>
                         </tr>
                         </tbody>
                     </table>

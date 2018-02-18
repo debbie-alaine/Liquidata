@@ -10,10 +10,14 @@ import {AuthService} from './auth/auth.service';
 import {AuthGuardService} from './auth/auth-guard.service';
 import {HeaderModule} from './shared/components/header/header.module';
 import { CollapseModule } from 'ngx-bootstrap';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { DbService } from './db/db.service'
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     imports: [
         HttpClientModule,
@@ -30,12 +34,15 @@ import { CollapseModule } from 'ngx-bootstrap';
                 },
                 whitelistedDomains: ['http://liquidatarewards.com']
             }
-        })
-    ],
+        }),
+        AngularFireModule.initializeApp(environment.firebase, 'liquidata'),
+        AngularFireDatabaseModule
+],
     bootstrap: [AppComponent],
     providers: [
         AuthService,
-        AuthGuardService
+        AuthGuardService,
+        DbService
     ]
 })
 

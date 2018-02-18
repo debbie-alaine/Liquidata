@@ -3,22 +3,20 @@
     <div class="card mb-3 main-card">
         <div class="card-header">Your Profile</div>
         <div class="image-cropper">
-            <img class="card-img-top" src={{profile?.picture}}>
-            <button class="btn btn-secondary" disabled>@JohnSmith</button>
-            <button class="btn btn-primary">Follow</button>
+            <img class="card-img" src={{profile?.picture}}>
         </div>
         <div class="card-block">
-            <button class="btn btn-secondary" disabled>{{profile?.name}}</button>
-            <button class="btn btn-primary">Follow</button>
+            <button class="btn btn-secondary" disabled>@{{profile?.nickname}}</button>
+            <button class="btn btn-secondary" disabled>Email: {{profile?.email}}</button>
         </div>
         <div class="card-block mb-3">
             <div class="card-header">Recent Activity</div>
             <ul>
                 <li>
-                    <p>John received 35% off Nike's "Data for headphones" offer. </p>
+                    <p><b>@{{profile?.nickname}}</b> received 35% off Nike's "Data for headphones" offer. </p>
                 </li>
                 <li>
-                    <p>John received 20% off McDonald's "McMeal Data deal" offer.</p>
+                    <p><b>@{{profile?.nickname}}</b> received 20% off McDonald's "McMeal Data deal" offer.</p>
                 </li>
             </ul>
         </div>

@@ -1,0 +1,59 @@
+{
+    "users": {
+        "u1234": {
+            "username": "@deborah_is_cool",
+            "followers": [],
+            "following": [],
+            "discounts": []
+        },
+        "u4567": {
+            "username": "@alaine_the_brain",
+            "followers": [],
+            "following": [],
+            "discounts": []
+        }
+    },
+    "company": {
+        "c8910": {
+            "name": "Apple",
+            "followers": [],
+            "discounts": []
+        }
+    },
+    "discounts": {
+        "1": {
+            "company_id": "c8910",
+            "description": "15% off headphones",
+            "users": ["u1234", "u4567"],
+            "likes": []
+        },
+        "2": {
+            "company_id": "u8910",
+            "description": "$20 Amazon Giftcard",
+            "users": ["u1234", "u4567"],
+            "likes": []
+        }
+    },
+    "activity": {
+        "u1234": {
+            "timestamp": "02-17-2018",
+            "description": "was approved for",
+            "discount_id": "1"
+        },
+        "u4567": {
+            "timestamp": "02-17-2018",
+            "description": "applied to",
+            "discount_id": "2"
+        }
+    },
+    "datahub": {
+        "c8910": {
+            "discount_id": "1",
+            "users": {
+                "u1234": {
+                    "data": "Spotify data retrieved"
+                }
+            }
+        }
+    }
+}

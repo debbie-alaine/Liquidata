@@ -1,0 +1,8 @@
+{
+    "discounts": [{
+        "user": 1234,
+        "code": "ABCD",
+        "status": "Pending",
+        "company": "McDonalds"
+    }]
+}

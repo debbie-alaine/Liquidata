@@ -1,4 +1,4 @@
-.card-img-top {
+.card-img {
     display: inline;
     margin: 0 auto;
     height: 100%;
@@ -39,6 +39,7 @@ li {
     position: relative;
     overflow: hidden;
     border-radius: 50%;
-    margin-top: 5%;
-    margin-left: 40%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
