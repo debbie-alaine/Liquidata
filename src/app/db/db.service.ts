@@ -38,12 +38,10 @@ export class DbService {
         const company_info = this.db.database.ref().child('/company');
 
         user_history.on('child_added', activity => {
-            console.log(activity.val().discount_id);
             discount_info.child(activity.val().discount_id).once('value', d_detail => {
-                console.log(d_detail.val());
                 company_info.child(d_detail.val().company_id).once('value', co_detail => {
                     history.push(new Activity(
-                        activity.val().description,
+                        activity.val().status,
                         activity.val().discount_id,
                         d_detail.val().description,
                         co_detail.val().name,
@@ -55,6 +53,34 @@ export class DbService {
 
 
         return history;
+    }
+
+    getActiveDiscountsFromUser(user_id): Activity[] {
+        const discount_activity = [];
+
+        const user_history = this.db.database.ref().child('/activity/' + user_id + '/history');
+        const discount_info = this.db.database.ref().child('/discounts');
+        const company_info = this.db.database.ref().child('/company');
+
+        user_history.on('child_added', activity => {
+            discount_info.child(activity.val().discount_id).once('value', d_detail => {
+                company_info.child(d_detail.val().company_id).once('value', co_detail => {
+
+                    if (activity.val().status === 'Approved' || activity.val().status === 'Applied') {
+                        discount_activity.push(new Activity(
+                            activity.val().status,
+                            activity.val().discount_id,
+                            d_detail.val().description,
+                            co_detail.val().name,
+                            activity.val().timestamp
+                        ));
+                    }
+                })
+            });
+        });
+
+
+        return discount_activity;
     }
 
 }

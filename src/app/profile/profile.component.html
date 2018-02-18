@@ -12,11 +12,11 @@
         <div class="card-block mb-3">
             <div class="card-header">Recent Activity</div>
             <ul>
-                <li>
-                    <p><b>@{{profile?.nickname}}</b> received 35% off Nike's "Data for headphones" offer. </p>
-                </li>
-                <li>
-                    <p><b>@{{profile?.nickname}}</b> received 20% off McDonald's "McMeal Data deal" offer.</p>
+                <li *ngFor="let activity of discount_activity">
+                    <p><b>{{profile?.nickname}}</b>
+                        {{activity.status === 'Approved' ? "received" : "applied to" }}
+                        <u>{{activity.discount_description}}</u> offer from
+                        {{activity.discount_company}}. </p>
                 </li>
             </ul>
         </div>
