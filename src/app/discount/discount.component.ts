@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../router.animations';
 import {DbService} from '../db/db.service';
 import {Discount} from '../shared/models/discount.model';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
     selector: 'app-discount',
@@ -13,11 +14,16 @@ export class DiscountComponent implements OnInit {
 
     discounts: Discount[];
 
-    constructor(private db: DbService) {
+    constructor(private db: DbService, private auth: AuthService) {
     }
 
     ngOnInit() {
-        this.discounts = this.db.getDiscountsFromUser('u1234')
-        console.log(this.discounts);
+        if (this.auth.userProfile) {
+            this.discounts = this.db.getDiscountsFromUser(this.auth.userProfile.sub);
+        } else {
+            this.auth.getProfile((err, profile) => {
+                this.discounts = this.db.getDiscountsFromUser(profile.sub);
+            });
+        }
     }
 }

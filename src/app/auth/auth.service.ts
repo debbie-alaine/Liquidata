@@ -39,7 +39,6 @@ export class AuthService {
             if (authResult && authResult.accessToken && authResult.idToken) {
                 window.location.hash = '';
                 this.setSession(authResult);
-                this.getProfile();
                 this.router.navigate(['/dashboard']);
             } else if (err) {
                 this.router.navigate(['/dashboard']);
@@ -56,16 +55,18 @@ export class AuthService {
         localStorage.setItem('expires_at', expiresAt);
     }
 
-    public getProfile(): void {
+    public getProfile(cb): void {
         const accessToken = localStorage.getItem('access_token');
         if (!accessToken) {
             throw new Error('Access Token must exist to fetch profile');
         }
 
+        const self = this;
         this.auth0.client.userInfo(accessToken, (err, profile) => {
             if (profile) {
-                this.userProfile = profile;
+                self.userProfile = profile;
             }
+            cb(err, profile);
         });
     }
 
