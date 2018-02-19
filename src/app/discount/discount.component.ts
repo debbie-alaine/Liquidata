@@ -13,6 +13,7 @@ import {AuthService} from '../auth/auth.service';
 export class DiscountComponent implements OnInit {
 
     discounts: Discount[];
+    showSpinner = true;
 
     constructor(private db: DbService, private auth: AuthService) {
     }
@@ -20,9 +21,11 @@ export class DiscountComponent implements OnInit {
     ngOnInit() {
         if (this.auth.userProfile) {
             this.discounts = this.db.getDiscountsFromUser(this.auth.userProfile.sub);
+            this.showSpinner = false;
         } else {
             this.auth.getProfile((err, profile) => {
                 this.discounts = this.db.getDiscountsFromUser(profile.sub);
+                this.showSpinner = false;
             });
         }
     }

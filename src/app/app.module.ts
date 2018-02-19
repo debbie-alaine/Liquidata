@@ -9,6 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt'
 import {AuthService} from './auth/auth.service';
 import {AuthGuardService} from './auth/auth-guard.service';
 import {HeaderModule} from './shared/components/header/header.module';
+import {LoadingModule} from './shared/components/loading/loading.module';
 import { CollapseModule } from 'ngx-bootstrap';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -17,7 +18,7 @@ import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
-        AppComponent,
+        AppComponent
     ],
     imports: [
         HttpClientModule,
@@ -26,6 +27,7 @@ import { environment } from '../environments/environment';
         FormsModule,
         AppRoutingModule,
         HeaderModule,
+        LoadingModule,
         CollapseModule.forRoot(),
         JwtModule.forRoot({
             config: {

@@ -2,14 +2,17 @@
 <div class="profile-page" [@routerTransition]>
     <div class="card mb-3 main-card">
         <div class="card-header">Your Profile</div>
-        <div class="image-cropper">
+        <div class="spinner" *ngIf="showSpinner">
+            <app-loading></app-loading>
+        </div>
+        <div class="image-cropper" *ngIf="!showSpinner">
             <img class="card-img" src={{profile?.picture}}>
         </div>
-        <div class="card-block">
+        <div class="card-block" *ngIf="!showSpinner">
             <button class="btn btn-secondary" disabled>@{{profile?.nickname}}</button>
             <button class="btn btn-secondary" disabled>Email: {{profile?.email}}</button>
         </div>
-        <div class="card-block mb-3">
+        <div class="card-block mb-3" *ngIf="!showSpinner">
             <div class="card-header">Recent Activity</div>
             <ul>
                 <li *ngFor="let activity of discount_activity">

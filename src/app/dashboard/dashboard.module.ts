@@ -7,8 +7,8 @@ import {
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
-import { StatModule } from '../shared/index';
 import {HeaderModule} from '../shared/components/header/header.module';
+import { LoadingModule } from '../shared/components/loading/loading.module';
 
 @NgModule({
     imports: [
@@ -16,8 +16,8 @@ import {HeaderModule} from '../shared/components/header/header.module';
         NgbCarouselModule.forRoot(),
         NgbAlertModule.forRoot(),
         DashboardRoutingModule,
-        StatModule,
-        HeaderModule
+        HeaderModule,
+        LoadingModule
     ],
     declarations: [DashboardComponent, TimelineComponent]
 })

@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
-import { PageHeaderComponent } from './page-header.component';
+import {LoadingComponent} from './loading.component';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule
     ],
-    declarations: [PageHeaderComponent],
-    exports: [PageHeaderComponent]
+    declarations: [LoadingComponent],
+    exports: [LoadingComponent]
 })
-export class PageHeaderModule { }
+export class LoadingModule { }

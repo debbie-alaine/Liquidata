@@ -8,8 +8,10 @@ import { routerTransition } from '../router.animations';
     animations: [routerTransition()]
 })
 export class DashboardComponent implements OnInit {
+    showSpinner = true;
 
     ngOnInit() {
+        this.showSpinner = false;
     }
 
     constructor() {}

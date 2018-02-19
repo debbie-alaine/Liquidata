@@ -7,6 +7,7 @@ import {
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
 import {HeaderModule} from '../shared/components/header/header.module';
+import { LoadingModule } from '../shared/components/loading/loading.module';
 
 @NgModule({
     imports: [
@@ -14,10 +15,11 @@ import {HeaderModule} from '../shared/components/header/header.module';
         NgbCarouselModule.forRoot(),
         NgbAlertModule.forRoot(),
         ProfileRoutingModule,
-        HeaderModule
+        HeaderModule,
+        LoadingModule
     ],
     declarations: [
-        ProfileComponent,
+        ProfileComponent
     ]
 })
 export class ProfileModule { }

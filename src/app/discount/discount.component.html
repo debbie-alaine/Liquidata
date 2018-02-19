@@ -4,7 +4,10 @@
         <div class="col col-xl-8 col-lg-12">
             <div class="card mb-3">
                 <div class="card-header">Your Discounts</div>
-                <div class="card-block table-responsive">
+                <div class="spinner" *ngIf="showSpinner">
+                    <app-loading></app-loading>
+                </div>
+                <div class="card-block table-responsive" *ngIf="!showSpinner">
                     <table class="table table-hover table-striped">
                         <thead>
                         <tr>

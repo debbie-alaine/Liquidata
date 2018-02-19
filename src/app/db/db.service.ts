@@ -1,4 +1,4 @@
-import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import { AngularFireDatabase} from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import {Discount} from '../shared/models/discount.model';

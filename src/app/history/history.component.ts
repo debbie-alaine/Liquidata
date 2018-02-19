@@ -13,6 +13,7 @@ import {DbService} from '../db/db.service';
 export class HistoryComponent implements OnInit {
 
     history: Activity[];
+    showSpinner = true;
 
     constructor(private db: DbService, private auth: AuthService) {
     }
@@ -20,9 +21,11 @@ export class HistoryComponent implements OnInit {
     ngOnInit() {
         if (this.auth.userProfile) {
             this.history = this.db.getHistoryFromUser(this.auth.userProfile.sub);
+            this.showSpinner = false;
         } else {
             this.auth.getProfile((err, profile) => {
                 this.history = this.db.getHistoryFromUser(profile.sub);
+                this.showSpinner = false;
             });
         }
     }
