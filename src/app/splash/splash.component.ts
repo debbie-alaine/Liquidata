@@ -18,7 +18,7 @@ export class SplashComponent implements OnInit {
 
   ngOnInit() {
       if (this.auth.isAuthenticated()) {
-          console.log('authenticated...');
+          console.log('Authenticated...');
           this.router.navigate(['/dashboard']);
       }
       if (!this.auth.isAuthenticated()) {
@@ -38,8 +38,8 @@ export class SplashComponent implements OnInit {
 
 
   public login() {
-        console.log('Logged Out Clicked');
-        this.auth.login();
+      this.auth.login();
+      this.router.navigate(['/dashboard']);
   }
 
 }

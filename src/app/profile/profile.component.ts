@@ -22,12 +22,12 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
         if (this.auth.userProfile) {
             this.profile = this.auth.userProfile;
-            this.discount_activity = this.db.getActiveDiscountsFromUser(this.auth.userProfile.sub);
+            this.discount_activity = this.db.getActiveDiscountsFromUser(this.auth.userProfile.sub, this.auth.userProfile.nickname);
             this.showSpinner = false;
         } else {
             this.auth.getProfile((err, profile) => {
                 this.profile = profile;
-                this.discount_activity = this.db.getActiveDiscountsFromUser(profile.sub);
+                this.discount_activity = this.db.getActiveDiscountsFromUser(profile.sub, profile.nickname);
                 this.showSpinner = false;
             });
         }

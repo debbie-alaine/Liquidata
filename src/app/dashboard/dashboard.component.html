@@ -4,7 +4,10 @@
         <div class="col-lg-8">
             <div class="card card-default">
                 <div class="card-header">Dashboard</div>
-                <app-timeline></app-timeline>
+                <div class="spinner" *ngIf="showSpinner">
+                    <app-loading></app-loading>
+                </div>
+                <app-timeline *ngIf="!showSpinner" [following_activity]="following_activity"></app-timeline>
             </div>
         </div>
     </div>
