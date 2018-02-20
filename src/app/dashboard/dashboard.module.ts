@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import {HeaderModule} from '../shared/components/header/header.module';
 import { LoadingModule } from '../shared/components/loading/loading.module';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 @NgModule({
     imports: [
@@ -19,7 +20,7 @@ import { LoadingModule } from '../shared/components/loading/loading.module';
         HeaderModule,
         LoadingModule
     ],
-    declarations: [DashboardComponent, TimelineComponent]
+    declarations: [DashboardComponent, TimelineComponent, TimeAgoPipe]
 })
 export class DashboardModule {
     constructor() { }

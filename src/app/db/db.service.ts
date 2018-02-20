@@ -46,7 +46,7 @@ export class DbService {
                         activity.val().discount_id,
                         d_detail.val().coupon_desc,
                         co_detail.val().username,
-                        activity.val().timestamp
+                        new Date(activity.val().timestamp)
                     ))
                 })
             });
@@ -72,7 +72,7 @@ export class DbService {
                             activity.val().discount_id,
                             d_detail.val().coupon_desc,
                             co_detail.val().username,
-                            activity.val().timestamp
+                            new Date(activity.val().timestamp)
                         ));
                     }
                 })
@@ -99,7 +99,7 @@ export class DbService {
                                     d_detail.val().coupon_desc,
                                     d_detail.val().data_desc,
                                     co_detail.val().username,
-                                    d_detail.val().timestamp
+                                    new Date(d_detail.val().timestamp)
                                 ));
                             });
                         });

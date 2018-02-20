@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {UserActivity} from '../../../shared/models/user_activity.model';
 import {CoActivity} from '../../../shared/models/co_activity.model';
 
 @Component({

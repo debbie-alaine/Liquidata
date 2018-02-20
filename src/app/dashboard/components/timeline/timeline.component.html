@@ -4,7 +4,7 @@
             <div class="timeline-panel">
                 <div class="timeline-heading">
                     <p class="timeline-title"><b>{{activity.discount_company}}</b></p>
-                    <p class="timeline-time"><small class="text-muted"><i class="fa fa-clock-o"></i>{{activity.timestamp}}</small></p>
+                    <p class="timeline-time"><small class="text-muted"><i class="fa fa-clock-o"></i> {{activity.timestamp * 1000| timeAgo}}</small></p>
                 </div>
                 <div class="timeline-body">
                     <p>Submit your {{activity.data_desc}} for {{activity.coupon_desc}}.</p>
