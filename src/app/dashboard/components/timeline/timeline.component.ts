@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Activity} from '../../../shared/models/activity.model';
+import {UserActivity} from '../../../shared/models/user_activity.model';
+import {CoActivity} from '../../../shared/models/co_activity.model';
 
 @Component({
   selector: 'app-timeline',
@@ -8,7 +9,7 @@ import {Activity} from '../../../shared/models/activity.model';
 })
 export class TimelineComponent implements OnInit {
 
-    @Input() following_activity: Activity[];
+    @Input() following_activity: CoActivity[];
     @Input() user_id;
 
   constructor() { }

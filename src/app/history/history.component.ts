@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../router.animations';
 import {AuthService} from '../auth/auth.service';
-import {Activity} from '../shared/models/activity.model';
+import {UserActivity} from '../shared/models/user_activity.model';
 import {DbService} from '../db/db.service';
 
 @Component({
@@ -12,7 +12,7 @@ import {DbService} from '../db/db.service';
 })
 export class HistoryComponent implements OnInit {
 
-    history: Activity[];
+    history: UserActivity[];
     showSpinner = true;
 
     constructor(private db: DbService, private auth: AuthService) {
