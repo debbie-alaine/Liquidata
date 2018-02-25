@@ -5,7 +5,8 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { DatahubRoutingModule } from './datahub-routing.module';
 import { DatahubComponent } from './datahub.component';
-import {HeaderModule} from '../shared/components/header/header.module';
+import { HeaderModule } from '../shared/components/header/header.module';
+import { FacebookComponent } from './components/facebook/facebook.component';
 
 @NgModule({
     imports: [
@@ -15,7 +16,7 @@ import {HeaderModule} from '../shared/components/header/header.module';
         HeaderModule
     ],
     declarations: [
-        DatahubComponent
+        DatahubComponent, FacebookComponent
     ]
 })
 export class DatahubModule { }

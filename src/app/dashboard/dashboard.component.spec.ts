@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbCarouselModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { TimelineComponent } from './components/index';
-import { StatModule } from '../shared/index';
+import { TimelineComponent } from './components';
 import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {
@@ -13,8 +12,7 @@ describe('DashboardComponent', () => {
     TestBed.configureTestingModule({
     imports: [
         NgbCarouselModule.forRoot(),
-        NgbAlertModule.forRoot(),
-        StatModule,
+        NgbAlertModule.forRoot()
     ],
       declarations: [
         DashboardComponent, TimelineComponent

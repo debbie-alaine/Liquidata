@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../router.animations';
-import {UserActivity} from '../shared/models/user_activity.model';
 import {AuthService} from '../auth/auth.service';
 import {DbService} from '../db/db.service';
 import {CoActivity} from '../shared/models/co_activity.model';

@@ -6,7 +6,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { TimelineComponent } from './components/timeline/timeline.component';
+import { TimelineComponent } from './components';
 import {HeaderModule} from '../shared/components/header/header.module';
 import { LoadingModule } from '../shared/components/loading/loading.module';
 import {TimeAgoPipe} from 'time-ago-pipe';

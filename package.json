@@ -51,6 +51,7 @@
     "mysql": "^2.15.0",
     "mysql2": "^1.5.1",
     "ngx-bootstrap": "^2.0.2",
+    "ngx-facebook": "^2.4.0",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.1",
     "passport-local": "^1.0.0",

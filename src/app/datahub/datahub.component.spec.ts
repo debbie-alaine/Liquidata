@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DatahubComponent } from './datahub.component';
+import { FacebookComponent } from './components/facebook/facebook.component';
 
 describe('DatahubComponent', () => {
   let component: DatahubComponent;
@@ -9,7 +10,7 @@ describe('DatahubComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
         imports: [ RouterTestingModule ],
-      declarations: [ DatahubComponent ]
+      declarations: [ DatahubComponent, FacebookComponent ]
     })
     .compileComponents();
   }));
