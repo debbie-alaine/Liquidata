@@ -20,11 +20,11 @@ export class DiscountComponent implements OnInit {
 
     ngOnInit() {
         if (this.auth.userProfile) {
-            this.discounts = this.db.getDiscountsFromUser(this.auth.userProfile.sub);
+            this.discounts = this.db.getApprovedDiscountsFromUser(this.auth.userProfile.sub);
             this.showSpinner = false;
         } else {
             this.auth.getProfile((err, profile) => {
-                this.discounts = this.db.getDiscountsFromUser(profile.sub);
+                this.discounts = this.db.getApprovedDiscountsFromUser(profile.sub);
                 this.showSpinner = false;
             });
         }

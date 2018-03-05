@@ -11,7 +11,7 @@ export class DbService {
     constructor(private db: AngularFireDatabase) {
     }
 
-    getDiscountsFromUser(user_id): Discount[] {
+    getApprovedDiscountsFromUser(user_id): Discount[] {
 
         const discounts = [];
 
@@ -20,21 +20,51 @@ export class DbService {
         const company_info = this.db.database.ref().child('/company');
 
         user_discounts.on('child_added', d_user => {
-            discount_info.child(d_user.val()).once('value', d_detail => {
+            discount_info.child(d_user.val().discount_id).once('value', d_detail => {
                 company_info.child(d_detail.val().company_id).once('value', co_detail => {
-                    const discount = new Discount(d_detail.val().code, co_detail.val().username, d_detail.val().coupon_desc);
-                    discounts.push(discount);
-                })
+                    if (d_user.val().status === 'Approved') {
+                        const discount = new Discount(d_user.val().code, co_detail.val().username, d_detail.val().coupon_desc);
+                        discounts.push(discount);
+                    }
+                });
             });
         });
 
         return discounts;
     }
 
+    getProfileActivityFromUser(user_id): UserActivity[] {
+        const discount_activity = [];
+        const user_history = this.db.database.ref().child('/users/' + user_id + '/discounts');
+        const discount_info = this.db.database.ref().child('/discounts');
+        const company_info = this.db.database.ref().child('/company');
+
+        user_history.on('child_added', activity => {
+            discount_info.child(activity.val().discount_id).once('value', d_detail => {
+                company_info.child(d_detail.val().company_id).once('value', co_detail => {
+
+                    if (activity.val().status !== 'Denied') {
+                        discount_activity.push(new UserActivity(
+                            activity.val().status,
+                            activity.val().discount_id,
+                            d_detail.val().coupon_desc,
+                            d_detail.val().data_desc,
+                            co_detail.val().username,
+                            d_detail.val().data_platform,
+                            new Date(activity.val().timestamp)
+                        ));
+                    }
+                })
+            });
+        });
+
+
+        return discount_activity;
+    }
+
     getHistoryFromUser(user_id): UserActivity[] {
         const history = [];
-
-        const user_history = this.db.database.ref().child('/activity/' + user_id);
+        const user_history = this.db.database.ref().child('/users/' + user_id + '/discounts');
         const discount_info = this.db.database.ref().child('/discounts');
         const company_info = this.db.database.ref().child('/company');
 
@@ -45,42 +75,17 @@ export class DbService {
                         activity.val().status,
                         activity.val().discount_id,
                         d_detail.val().coupon_desc,
+                        d_detail.val().data_desc,
                         co_detail.val().username,
+                        d_detail.val().data_platform,
                         new Date(activity.val().timestamp)
-                    ))
+                    ));
                 })
             });
         });
 
 
         return history;
-    }
-
-    getActiveDiscountsFromUser(user_id): UserActivity[] {
-        const discount_activity = [];
-        const user_history = this.db.database.ref().child('/activity/' + user_id);
-        const discount_info = this.db.database.ref().child('/discounts');
-        const company_info = this.db.database.ref().child('/company');
-
-        user_history.on('child_added', activity => {
-            discount_info.child(activity.val().discount_id).once('value', d_detail => {
-                company_info.child(d_detail.val().company_id).once('value', co_detail => {
-
-                    if (activity.val().status === 'Approved' || activity.val().status === 'Applied') {
-                        discount_activity.push(new UserActivity(
-                            activity.val().status,
-                            activity.val().discount_id,
-                            d_detail.val().coupon_desc,
-                            co_detail.val().username,
-                            new Date(activity.val().timestamp)
-                        ));
-                    }
-                })
-            });
-        });
-
-
-        return discount_activity;
     }
 
     getFollowingActivityFromUser(user_id): CoActivity[] {
@@ -99,6 +104,7 @@ export class DbService {
                                     d_detail.val().coupon_desc,
                                     d_detail.val().data_desc,
                                     co_detail.val().username,
+                                    d_detail.val().data_platform,
                                     new Date(d_detail.val().timestamp)
                                 ));
                             });

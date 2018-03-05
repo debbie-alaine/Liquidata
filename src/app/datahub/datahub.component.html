@@ -1,22 +1,37 @@
 <app-header></app-header>
-<div class="datahub-page" [@routerTransition]>
+<div class="history-page" [@routerTransition]>
     <div class="row">
         <div class="col col-xl-8 col-lg-12">
             <div class="card mb-3">
-        <div class="card-header">Datahub</div>
-        <div class="row">
-            <div class="card-block">
-                <img class="card-img-top" src="../assets/images/spotify.png" alt="Card image cap">
-            </div>
-            <div class="card-block">
-                <img class="card-img-top" src="../assets/images/amazon.png" alt="Card image cap">
-            </div>
-            <div class="card-block">
-                <img class="card-img-top" src="../assets/images/facebook.png" alt="Card image cap">
+                <div class="card-header">DataHub</div>
+                <div class="spinner" *ngIf="showSpinner">
+                    <app-loading></app-loading>
+                </div>
+                <div class="card-block table-responsive" *ngIf="!showSpinner">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Coupon Description</th>
+                            <th>Data Description</th>
+                            <th>Data Platform</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let activity of history">
+                            <td>@{{activity.discount_company}}</td>
+                            <td>{{activity.discount_description}}
+                            <td>{{activity.data_description}}</td>
+                            <td>{{activity.data_platform}}</td>
+                            <th><button mat-raised-button (click)="openDialog()">
+                                Submit
+                            </button></th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-        </div>
     </div>
-    </div>
-    <app-facebook></app-facebook>
 </div>

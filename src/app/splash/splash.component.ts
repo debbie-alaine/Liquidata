@@ -39,7 +39,6 @@ export class SplashComponent implements OnInit {
 
   public login() {
       this.auth.login();
-      this.router.navigate(['/dashboard']);
   }
 
 }

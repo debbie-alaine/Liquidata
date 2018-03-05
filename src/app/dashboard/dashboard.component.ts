@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         if (this.auth.userProfile) {
+            this.showSpinner = true;
             this.profile = this.auth.userProfile;
             this.following_activity = this.db.getFollowingActivityFromUser(this.auth.userProfile.sub);
             this.showSpinner = false;

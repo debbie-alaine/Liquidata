@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FacebookComponent } from './facebook.component';
+import {DialogComponent} from './dialog.component';
 
-describe('FacebookComponent', () => {
-    let component: FacebookComponent;
-    let fixture: ComponentFixture<FacebookComponent>;
+describe('DialogComponent', () => {
+    let component: DialogComponent;
+    let fixture: ComponentFixture<DialogComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ FacebookComponent ]
+            declarations: [ DialogComponent ]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(FacebookComponent);
+        fixture = TestBed.createComponent(DialogComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

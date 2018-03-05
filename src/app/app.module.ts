@@ -15,10 +15,13 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { DbService } from './db/db.service'
 import { environment } from '../environments/environment';
+import {DialogComponent} from './shared/components';
+import {MaterialModule} from './shared/components';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        DialogComponent
     ],
     imports: [
         HttpClientModule,
@@ -28,6 +31,7 @@ import { environment } from '../environments/environment';
         AppRoutingModule,
         HeaderModule,
         LoadingModule,
+        MaterialModule,
         CollapseModule.forRoot(),
         JwtModule.forRoot({
             config: {
@@ -45,7 +49,8 @@ import { environment } from '../environments/environment';
         AuthService,
         AuthGuardService,
         DbService
-    ]
+    ],
+    entryComponents: [DialogComponent]
 })
 
 export class AppModule {

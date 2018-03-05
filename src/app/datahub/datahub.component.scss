@@ -22,3 +22,13 @@
     -ms-transition: all 1s ease;
     transition: all 0.2s ease;
 }
+
+.spinner{
+    height: 50%;
+    width: 100%;
+    z-index: 999;
+}
+
+.btn{
+    color: #01579B;
+}

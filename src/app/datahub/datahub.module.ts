@@ -6,17 +6,20 @@ import {
 import { DatahubRoutingModule } from './datahub-routing.module';
 import { DatahubComponent } from './datahub.component';
 import { HeaderModule } from '../shared/components/header/header.module';
-import { FacebookComponent } from './components/facebook/facebook.component';
+import {LoadingModule} from '../shared/components/loading/loading.module';
+import {FormsModule} from '@angular/forms';
+import {MaterialModule} from '../shared/components';
 
 @NgModule({
     imports: [
         CommonModule,
         NgbAlertModule.forRoot(),
         DatahubRoutingModule,
-        HeaderModule
+        HeaderModule,
+        LoadingModule
     ],
     declarations: [
-        DatahubComponent, FacebookComponent
+        DatahubComponent
     ]
 })
 export class DatahubModule { }
