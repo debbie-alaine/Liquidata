@@ -24,8 +24,8 @@
                             <td>{{activity.discount_description}}
                             <td>{{activity.data_description}}</td>
                             <td>{{activity.data_platform}}</td>
-                            <th><button mat-raised-button (click)="openDialog()">
-                                Submit
+                            <th><button mat-raised-button (click)="openDialog(activity.data_platform)" color="primary">
+                                Submit Data
                             </button></th>
                         </tr>
                         </tbody>
