@@ -17,11 +17,13 @@ import { DbService } from './db/db.service'
 import { environment } from '../environments/environment';
 import {DialogComponent} from './shared/components';
 import {MaterialModule} from './shared/components';
+import { CompanyDetailComponent } from './company-detail/company-detail.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        DialogComponent
+        DialogComponent,
+        CompanyDetailComponent
     ],
     imports: [
         HttpClientModule,

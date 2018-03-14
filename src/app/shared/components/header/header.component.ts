@@ -19,5 +19,5 @@ export class HeaderComponent implements OnInit {
 
     public logout() {
         this.auth.logout();
-        this.router.navigate(['/splash'])}
+    }
 }

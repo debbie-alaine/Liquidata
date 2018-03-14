@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
+import { CompanyDetailComponent } from './company-detail/company-detail.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
     { path: 'datahub', loadChildren: './datahub/datahub.module#DatahubModule', canActivate: [AuthGuard] },
     { path: 'history', loadChildren: './history/history.module#HistoryModule', canActivate: [AuthGuard] },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
+    { path: 'company-detail/:id', component: CompanyDetailComponent, canActivate: [AuthGuard]},
     { path: 'profile', loadChildren: './profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
     { path: '**', redirectTo: 'not-found' }
 ];
