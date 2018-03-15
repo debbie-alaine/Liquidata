@@ -11,7 +11,8 @@ export class DbService {
     constructor(private db: AngularFireDatabase) {
     }
 
-    getApprovedDiscountsFromUser(user_id): Discount[] {
+    // For Discount Page: user has been approved and data submitted.
+    getCompletedDiscountsFromUser(user_id): Discount[] {
 
         const discounts = [];
 
@@ -33,7 +34,8 @@ export class DbService {
         return discounts;
     }
 
-    getProfileActivityFromUser(user_id): UserActivity[] {
+    // For Profile Page: User activity, except denials.
+    getUserActivity(user_id): UserActivity[] {
         const discount_activity = [];
         const user_history = this.db.database.ref().child('/users/' + user_id + '/discounts');
         const discount_info = this.db.database.ref().child('/discounts');
@@ -62,6 +64,7 @@ export class DbService {
         return discount_activity;
     }
 
+    // For History Page: All user activity.
     getHistoryFromUser(user_id): UserActivity[] {
         const history = [];
         const user_history = this.db.database.ref().child('/users/' + user_id + '/discounts');
@@ -88,6 +91,7 @@ export class DbService {
         return history;
     }
 
+    // For Datahub Page: All approved activity pending data submission.
     getDatahubActivityFromUser(user_id): UserActivity[] {
         const datahub_activity = [];
         const user_history = this.db.database.ref().child('/users/' + user_id + '/discounts');
@@ -117,6 +121,8 @@ export class DbService {
         return datahub_activity;
     }
 
+    // For Dashboard Page: All company activity a user follows
+    // TODO: sort by timestamp
     getFollowingActivityFromUser(user_id): CoActivity[] {
         const following_activity = [];
         const co_following = this.db.database.ref().child('/users/' + user_id + '/co_following');
@@ -144,4 +150,28 @@ export class DbService {
         return following_activity;
     }
 
+    // For Profile Page: User activity, except denials.
+    getCompanyActivity(company_id): CoActivity[] {
+        const company_activity = [];
+        const all_company = this.db.database.ref().child('/company');
+        const discounts = this.db.database.ref().child('/discounts');
+
+        all_company.on('child_added', company  => {
+            if (company.val().username === company_id) {
+                for (const d of company.val().discounts) {
+                    discounts.child(d).once('value', d_detail => {
+                        company_activity.push(new CoActivity(
+                            d_detail.val().discount_id,
+                            d_detail.val().coupon_desc,
+                            d_detail.val().data_desc,
+                            company.val().username,
+                            d_detail.val().data_platform,
+                            new Date(d_detail.val().timestamp)
+                        ));
+                    });
+                }
+            }
+        });
+        return company_activity;
+    }
 }

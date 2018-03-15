@@ -1,8 +1,8 @@
 <app-header></app-header>
 <div class="history-page" [@routerTransition]>
     <div class="row">
-        <div class="col col-xl-8 col-lg-12">
-            <div class="card mb-3">
+        <div class="col-lg-8">
+            <div class="card card-default">
                 <div class="card-header">Your History</div>
                 <div class="spinner" *ngIf="showSpinner">
                     <app-loading></app-loading>
@@ -18,7 +18,9 @@
                         </thead>
                         <tbody>
                         <tr *ngFor="let activity of history">
-                            <td>@{{activity.discount_company}}</td>
+                            <td><a [routerLink]="['/company-detail', activity.discount_company]">
+                                @{{activity.discount_company}}</a>
+                            </td>
                             <td>{{activity.discount_description}}</td>
                             <td>{{activity.status}}</td>
                         </tr>

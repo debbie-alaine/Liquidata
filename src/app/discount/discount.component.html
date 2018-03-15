@@ -1,8 +1,8 @@
 <app-header></app-header>
 <div class="discount-page" [@routerTransition]>
     <div class="row">
-        <div class="col col-xl-8 col-lg-12">
-            <div class="card mb-3">
+        <div class="col-lg-8">
+            <div class="card card-default">
                 <div class="card-header">Your Discounts</div>
                 <div class="spinner" *ngIf="showSpinner">
                     <app-loading></app-loading>
@@ -18,7 +18,9 @@
                         </thead>
                         <tbody>
                         <tr *ngFor="let discount of discounts">
-                            <td>@{{discount.company}}</td>
+                            <td><a [routerLink]="['/company-detail', discount.company]">
+                                @{{discount.company}}
+                            </a></td>
                             <td>{{discount.description}}</td>
                             <td>{{discount.code}}</td>
                         </tr>

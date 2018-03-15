@@ -1,4 +1,23 @@
 <app-header></app-header>
 <div class="company-detail-page" [@routerTransition]>
-    <p>It works!</p>
+    <div class="card mb-3 main-card">
+        <div class="card-header">Company Profile</div>
+        <div class="spinner" *ngIf="showSpinner">
+            <app-loading></app-loading>
+        </div>
+        <div class="image-cropper" *ngIf="!showSpinner">
+            <img class="card-img" src={{profile?.picture}}>
+        </div>
+        <div class="card-block" *ngIf="!showSpinner">
+            <button class="btn btn-secondary" disabled>@{{companyName}}</button>
+        </div>
+        <div class="card-block mb-3" *ngIf="!showSpinner">
+            <div class="card-header">Recent Activity</div>
+            <ul>
+                <li *ngFor="let activity of companyActivity">
+                    <p>Submit {{activity.data_desc}} on {{activity.data_platform }} for {{activity.coupon_desc}}.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>

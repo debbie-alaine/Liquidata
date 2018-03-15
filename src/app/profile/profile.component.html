@@ -19,7 +19,8 @@
                     <p><b>{{profile?.nickname}}</b>
                         {{activity.status === 'Approved' ? "received" : "applied to" }}
                         <u>{{activity.discount_description}}</u> offer from
-                        @{{activity.discount_company}}. </p>
+                        <a [routerLink]="['/company-detail', activity.discount_company]">@{{activity.discount_company}}</a>.
+                    </p>
                 </li>
             </ul>
         </div>

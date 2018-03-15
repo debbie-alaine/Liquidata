@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { routerTransition} from '../router.animations';
 import { AuthService } from '../auth/auth.service';
 import { DbService } from '../db/db.service';
 import { ActivatedRoute } from '@angular/router';
+import {CoActivity} from '../shared/models/co_activity.model';
 
 @Component({
   selector: 'app-company-detail',
@@ -10,16 +11,25 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./company-detail.component.scss'],
     animations: [routerTransition()]
 })
-export class CompanyDetailComponent implements OnInit {
+export class CompanyDetailComponent implements OnInit, OnDestroy {
 
+    private routeSub: any;
+    private companyName: string;
+    private companyActivity: CoActivity[];
     showSpinner = true;
 
     constructor(private route: ActivatedRoute, private db: DbService, private auth: AuthService) {
     }
 
     ngOnInit() {
-        this.route.params.subscribe(params => {
-            console.log(params);
+        this.routeSub = this.route.params.subscribe(params => {
+            this.companyName = params['id'];
+            this.companyActivity = this.db.getCompanyActivity(this.companyName);
+            this.showSpinner = false;
         })
+    }
+
+    ngOnDestroy() {
+        this.routeSub.unsubscribe();
     }
 }
