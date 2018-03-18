@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,8 +14,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { DbService } from './db/db.service'
 import { environment } from '../environments/environment';
-import {DialogComponent} from './shared/components';
-import {MaterialModule} from './shared/components';
+import { DialogComponent } from './shared/components';
+import { MaterialModule } from './shared/components';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
 
 @NgModule({
@@ -29,11 +28,10 @@ import { CompanyDetailComponent } from './company-detail/company-detail.componen
         HttpClientModule,
         BrowserModule,
         BrowserAnimationsModule,
-        FormsModule,
+        MaterialModule,
         AppRoutingModule,
         HeaderModule,
         LoadingModule,
-        MaterialModule,
         CollapseModule.forRoot(),
         JwtModule.forRoot({
             config: {

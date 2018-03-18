@@ -29,3 +29,12 @@ $topnav-background-color: #01579B;
     background: darken($topnav-background-color, 5%);
     color: #fff;
 }
+
+.nav>li input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}
