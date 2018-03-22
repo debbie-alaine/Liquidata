@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="search-results-page" [@routerTransition]>
+    <div class="card mb-3 main-card">
+        <div class="card-header">Search Results</div>
+        <div class="spinner" *ngIf="showSpinner">
+            <app-loading></app-loading>
+        </div>
+        <div class="card-block mb-3" *ngIf="!showSpinner">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>Company</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngIf="companies.length == 0">
+                    <td>No results found.</td>
+                </tr>
+                <tr *ngFor="let company of companies">
+                    <td>
+                        <a [routerLink]="['/company-detail', company]">
+                            <b>@{{company}}</b>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

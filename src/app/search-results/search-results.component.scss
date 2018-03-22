@@ -1,0 +1,51 @@
+.card-img {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+    width: auto;
+}
+
+.btn {
+    width: auto;
+    margin: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+ul {
+    list-style: none;
+    padding-top: 8px;
+}
+
+li {
+    width: auto;
+}
+
+.card{
+    position: relative;
+    padding: 15px;
+    border: 1px solid #d4d4d4;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.175);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.175);
+    width: 60%;
+    margin: auto;
+    display: block;
+}
+
+.image-cropper {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.spinner{
+    height: 50%;
+    width: 100%;
+    z-index: 999;
+}

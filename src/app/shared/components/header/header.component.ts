@@ -20,4 +20,8 @@ export class HeaderComponent implements OnInit {
     public logout() {
         this.auth.logout();
     }
+
+    public onSubmit(searchValue: string) {
+        this.router.navigate(['/search'], { queryParams: { value: searchValue } });
+    }
 }

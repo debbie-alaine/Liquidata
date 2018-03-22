@@ -13,6 +13,7 @@ const routes: Routes = [
     { path: 'history', loadChildren: './history/history.module#HistoryModule', canActivate: [AuthGuard] },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
     { path: 'company-detail/:id', component: CompanyDetailComponent, canActivate: [AuthGuard]},
+    { path: 'search', loadChildren: './search-results/search-results.module#SearchResultsModule', canActivate: [AuthGuard] },
     { path: 'profile', loadChildren: './profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
     { path: '**', redirectTo: 'not-found' }
 ];

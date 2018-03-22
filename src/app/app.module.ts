@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 import { DialogComponent } from './shared/components';
 import { MaterialModule } from './shared/components';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import { CompanyDetailComponent } from './company-detail/company-detail.componen
             }
         }),
         AngularFireModule.initializeApp(environment.firebase, 'liquidata'),
-        AngularFireDatabaseModule
+        AngularFireDatabaseModule,
+        FormsModule
 ],
     bootstrap: [AppComponent],
     providers: [

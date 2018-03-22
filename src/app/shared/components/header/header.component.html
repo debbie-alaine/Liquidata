@@ -26,11 +26,9 @@
             </ul>
             <ul class="nav navbar-nav">
                 <li class="nav-item">
-                    <div class="search-container">
-                        <form action="">
-                            <input type="text" placeholder="Search.." name="search">
-                        </form>
-                    </div>
+                    <form (submit)="onSubmit(search.value)" method="get">
+                        <input #search type="text" placeholder="Search...">
+                    </form>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/profile']" [routerLinkActive]="['router-link-active']">

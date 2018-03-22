@@ -64,6 +64,21 @@ export class DbService {
         return discount_activity;
     }
 
+    // Get all company users
+    async getCompanyList(searchValue: string) {
+        const companies = [];
+        const company_info = this.db.database.ref().child('/company');
+
+        company_info.orderByChild('username').equalTo(searchValue)
+            .on('child_added', results => {
+
+                console.log(results.val().username);
+                companies.push(results.val().username);
+            });
+
+        return companies;
+    }
+
     // For History Page: All user activity.
     getHistoryFromUser(user_id): UserActivity[] {
         const history = [];
