@@ -18,12 +18,14 @@ import { DialogComponent } from './shared/components';
 import { MaterialModule } from './shared/components';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
 import { FormsModule } from '@angular/forms';
+import {UserDetailComponent} from './user-detail/user-detail.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         DialogComponent,
-        CompanyDetailComponent
+        CompanyDetailComponent,
+        UserDetailComponent
     ],
     imports: [
         HttpClientModule,

@@ -1,7 +1,7 @@
 <app-header></app-header>
-<div class="profile-page" [@routerTransition]>
+<div class="user-detail-page" [@routerTransition]>
     <div class="card mb-3 main-card">
-        <div class="card-header">Your Profile</div>
+        <div class="card-header">User Profile</div>
         <div class="spinner" *ngIf="showSpinner">
             <app-loading></app-loading>
         </div>
@@ -9,14 +9,15 @@
             <img class="card-img" src={{profile?.picture}}>
         </div>
         <div class="card-block" *ngIf="!showSpinner">
-            <button class="btn btn-secondary" disabled>@{{profile?.nickname}}</button>
-            <button class="btn btn-secondary" disabled>Email: {{profile?.email}}</button>
+            <button class="btn btn-secondary" disabled>@{{userName}}</button>
+            <button class="btn btn-primary">Follow</button>
         </div>
         <div class="card-block mb-3" *ngIf="!showSpinner">
             <div class="card-header">Recent Activity</div>
             <ul>
-                <li *ngFor="let activity of discount_activity">
-                    <p>You {{activity.status === 'Approved' ? "received" : "applied to" }}
+                <li *ngFor="let activity of userActivity">
+                    <p> @{{userName}}
+                        {{activity.status === 'Approved' ? "received" : "applied to" }}
                         <u>{{activity.discount_description}}</u> offer from
                         <a [routerLink]="['/company-detail', activity.discount_company]">@{{activity.discount_company}}</a>.
                     </p>
@@ -25,4 +26,3 @@
         </div>
     </div>
 </div>
-

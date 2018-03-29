@@ -12,6 +12,7 @@ import {ActivatedRoute} from '@angular/router';
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
     companies: string[];
+    users: string[];
     showSpinner = true;
     private routeSub: any;
     private searchValue: string;
@@ -20,16 +21,23 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.routeSub = this.route.queryParams.subscribe(params => {
             this.searchValue = params['value'];
 
-            this.db.getCompanyList(this.searchValue).then(
+            this.db.searchByCompany(this.searchValue).then(
                 (results) => {
                     this.companies = results;
-                    this.showSpinner = false;
+                }
+            );
+
+            this.db.searchByUser(this.searchValue).then(
+                (results) => {
+                    this.users = results;
                 }
             );
         });
     }
 
     ngOnInit() {
+        console.log
+        this.showSpinner = false;
     }
 
     ngOnDestroy() {

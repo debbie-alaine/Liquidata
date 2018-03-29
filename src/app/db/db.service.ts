@@ -35,7 +35,7 @@ export class DbService {
     }
 
     // For Profile Page: User activity, except denials.
-    getUserActivity(user_id): UserActivity[] {
+    async getUserActivityByUserId(user_id) {
         const discount_activity = [];
         const user_history = this.db.database.ref().child('/users/' + user_id + '/discounts');
         const discount_info = this.db.database.ref().child('/discounts');
@@ -60,23 +60,42 @@ export class DbService {
             });
         });
 
-
         return discount_activity;
     }
 
-    // Get all company users
-    async getCompanyList(searchValue: string) {
+    getUserId(username) {
+        const results = [];
+        const users = this.db.database.ref().child('/users');
+
+        users.orderByChild('username').equalTo(username).on('child_added', snapshot => {
+            results.push(snapshot.key);
+        });
+
+        return results;
+    }
+
+    async searchByCompany(searchValue: string) {
         const companies = [];
         const company_info = this.db.database.ref().child('/company');
 
         company_info.orderByChild('username').equalTo(searchValue)
             .on('child_added', results => {
-
-                console.log(results.val().username);
                 companies.push(results.val().username);
             });
 
         return companies;
+    }
+
+    async searchByUser(searchValue: string) {
+        const users = [];
+        const user_info = this.db.database.ref().child('/users');
+
+        user_info.orderByChild('username').equalTo(searchValue)
+            .on('child_added', snapshot => {
+                users.push(snapshot.val().username);
+            });
+
+        return users;
     }
 
     // For History Page: All user activity.

@@ -9,7 +9,7 @@
             <table class="table table-hover table-striped">
                 <thead>
                 <tr>
-                    <th>Company</th>
+                    <th>Companies</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -21,6 +21,27 @@
                         <a [routerLink]="['/company-detail', company]">
                             <b>@{{company}}</b>
                         </a>
+                        <button class="btn-primary">Follow</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>Users</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngIf="users.length == 0">
+                    <td>No results found.</td>
+                </tr>
+                <tr *ngFor="let user of users">
+                    <td>
+                        <a [routerLink]="['/user-detail', user]">
+                            <b>@{{user}}</b>
+                        </a>
+                        <button class="btn-primary">Follow</button>
                     </td>
                 </tr>
                 </tbody>
