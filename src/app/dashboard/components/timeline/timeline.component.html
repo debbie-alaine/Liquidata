@@ -11,7 +11,8 @@
                 </div>
                 <div class="timeline-body">
                     <p>Submit {{activity.data_desc}} on {{activity.data_platform }} for {{activity.coupon_desc}}.</p>
-                    <a href="javascript:void(0)">Like <i class="fa fa-thumbs-o-up"></i></a>
+                    <a #elem id="{{activity.discount_company}}{{activity.discount_id}}"
+                       href="javascript:void(0)" (click)="isLiked(elem.id)">Like <i class="fa fa-thumbs-o-up"></i></a>
                 </div>
             </div>
         </li>
