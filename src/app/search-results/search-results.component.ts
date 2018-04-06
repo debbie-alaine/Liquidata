@@ -36,7 +36,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        console.log
         this.showSpinner = false;
     }
 

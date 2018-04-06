@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { routerTransition} from '../router.animations';
-import { AuthService } from '../auth/auth.service';
 import { DbService } from '../db/db.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {CoActivity} from '../shared/models/co_activity.model';
 
 @Component({
@@ -14,31 +13,26 @@ import {CoActivity} from '../shared/models/co_activity.model';
 export class CompanyDetailComponent implements OnInit, OnDestroy {
 
     private routeSub: any;
-    private companyName: string;
+    public companyName: string;
+    public companyURL: string;
     private companyActivity: CoActivity[];
     showSpinner = true;
 
-    constructor(private route: ActivatedRoute, private db: DbService, private router: Router) {
+    constructor(private route: ActivatedRoute, private db: DbService) {
     }
 
     ngOnInit() {
-
-        if (!this.checkCompanyNameExists(this.companyName)) {
-            this.router.navigate(['/not-found']);
-        }
-
-        this.routeSub = this.route.params.subscribe(params => {
+        this.routeSub = this.route.params.subscribe( async params => {
             this.companyName = params['id'];
-            this.companyActivity = this.db.getCompanyActivity(this.companyName);
+            const companyId = await this.db.getCompanyId(this.companyName)[0];
+            console.log('Company ID: ' + companyId);
+            this.companyActivity = await this.db.getCompanyActivityByCompanyId(companyId);
+            this.companyURL = await this.db.getCompanyProfilePicture(companyId)[0];
             this.showSpinner = false;
-        })
+            });
     }
 
     ngOnDestroy() {
         this.routeSub.unsubscribe();
-    }
-
-    checkCompanyNameExists(companyName) {
-        return true;
     }
 }

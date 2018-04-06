@@ -8,9 +8,9 @@ $topnav-background-color: #222;
     left: 0;
     right: 0;
     overflow: auto;
-    background: $topnav-background-color;
+    //background: $topnav-background-color;
     text-align: center;
-    color: #fff;
+    color: $topnav-background-color;
     padding: 10em;
     .col-lg-8{
         padding :0;
@@ -36,5 +36,11 @@ $topnav-background-color: #222;
         margin-top: 20px;
         margin-bottom: 10px;
         font-size: 36px;
+    }
+
+    .spinner{
+        height: 50%;
+        width: 100%;
+        z-index: 999;
     }
 }

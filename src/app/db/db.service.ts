@@ -63,11 +63,45 @@ export class DbService {
         return discount_activity;
     }
 
+    // For Profile Page: all Company activity
+    async getCompanyActivityByCompanyId(company_id) {
+        console.log('id is ' + company_id);
+        const company_activity = [];
+        const company_history = this.db.database.ref().child('/company/' + company_id + '/discounts');
+        const discounts = this.db.database.ref().child('/discounts');
+
+        company_history.on('child_added', company  => {
+            discounts.child(company.val()).once('value', d_detail => {
+                    company_activity.push(new CoActivity(
+                        d_detail.val().discount_id,
+                        d_detail.val().coupon_desc,
+                        d_detail.val().data_desc,
+                        company.val().username,
+                        d_detail.val().data_platform,
+                        new Date(d_detail.val().timestamp),
+                        d_detail.val().profile_pic
+                    ));
+                });
+        });
+        return company_activity;
+    }
+
     getUserId(username) {
         const results = [];
         const users = this.db.database.ref().child('/users');
 
         users.orderByChild('username').equalTo(username).on('child_added', snapshot => {
+            results.push(snapshot.key);
+        });
+
+        return results;
+    }
+
+     getCompanyId(username) {
+        const results = [];
+        const companies = this.db.database.ref().child('/company');
+
+        companies.orderByChild('username').equalTo(username).on('child_added', snapshot => {
             results.push(snapshot.key);
         });
 
@@ -174,7 +208,8 @@ export class DbService {
                                     d_detail.val().data_desc,
                                     co_detail.val().username,
                                     d_detail.val().data_platform,
-                                    new Date(d_detail.val().timestamp)
+                                    new Date(d_detail.val().timestamp),
+                                    d_detail.val().profile_pic
                                 ));
                             });
                         });
@@ -184,28 +219,25 @@ export class DbService {
         return following_activity;
     }
 
-    // For Profile Page: User activity, except denials.
-    getCompanyActivity(company_id): CoActivity[] {
-        const company_activity = [];
-        const all_company = this.db.database.ref().child('/company');
-        const discounts = this.db.database.ref().child('/discounts');
+    getCompanyProfilePicture(company_id) {
+        const result = [];
+        const url = this.db.database.ref().child('/company/' + company_id + '/profile_pic');
 
-        all_company.on('child_added', company  => {
-            if (company.val().username === company_id) {
-                for (const d of company.val().discounts) {
-                    discounts.child(d).once('value', d_detail => {
-                        company_activity.push(new CoActivity(
-                            d_detail.val().discount_id,
-                            d_detail.val().coupon_desc,
-                            d_detail.val().data_desc,
-                            company.val().username,
-                            d_detail.val().data_platform,
-                            new Date(d_detail.val().timestamp)
-                        ));
-                    });
-                }
-            }
+        url.on('value', pic  => {
+            result.push(pic.val());
         });
-        return company_activity;
+
+        return result;
+    }
+
+    getUserProfilePicture(userId) {
+        const result = [];
+        const url = this.db.database.ref().child('/users/' + userId + '/profile_pic');
+
+        url.on('value', pic  => {
+            result.push(pic.val());
+        });
+
+        return result;
     }
 }

@@ -25,7 +25,7 @@ import {UserDetailComponent} from './user-detail/user-detail.component';
         AppComponent,
         DialogComponent,
         CompanyDetailComponent,
-        UserDetailComponent
+        UserDetailComponent,
     ],
     imports: [
         HttpClientModule,

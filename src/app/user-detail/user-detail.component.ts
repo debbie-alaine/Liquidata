@@ -14,6 +14,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
     private routeSub: any;
     private userName: string;
+    private userURL: string;
     private userActivity: UserActivity[];
     showSpinner = true;
 
@@ -27,10 +28,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
         this.routeSub = this.route.params.subscribe(async params => {
             this.userName = params['id'];
-            const userId = await this.db.getUserId(this.userName);
-            console.log(userId);
-
-            this.userActivity = await this.db.getUserActivityByUserId(userId[0]);
+            const userId = await this.db.getUserId(this.userName)[0];
+            console.log('User ID: ' + userId);
+            this.userActivity = await this.db.getUserActivityByUserId(userId);
+            this.userURL = await this.db.getUserProfilePicture(userId)[0];
             this.showSpinner = false;
         });
     }

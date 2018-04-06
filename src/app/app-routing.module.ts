@@ -5,7 +5,7 @@ import { CompanyDetailComponent } from './company-detail/company-detail.componen
 import { UserDetailComponent } from './user-detail/user-detail.component';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'splash', pathMatch: 'full'},
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard]},
     { path: 'splash', loadChildren: './splash/splash.module#SplashModule'},
     { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard]},
     { path: 'discounts', loadChildren: './discount/discount.module#DiscountModule', canActivate: [AuthGuard] },

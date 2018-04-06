@@ -6,7 +6,7 @@
             <app-loading></app-loading>
         </div>
         <div class="image-cropper" *ngIf="!showSpinner">
-            <img class="card-img" src={{profile?.picture}}>
+            <img class="card-img" src={{userURL}}>
         </div>
         <div class="card-block" *ngIf="!showSpinner">
             <button class="btn btn-secondary" disabled>@{{userName}}</button>
