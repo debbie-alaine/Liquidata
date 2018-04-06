@@ -133,3 +133,21 @@
         height: 50px;
     }
 }
+
+ul.no-activity {
+    text-align: center;
+}
+
+ul.no-activity > li {
+    display: inline-block;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+ul.no-activity > li > a{
+    width: auto;
+    margin: auto;
+    display: block;
+    margin-top: 10px;
+}

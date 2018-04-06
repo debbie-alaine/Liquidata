@@ -16,6 +16,7 @@ export class DatahubComponent implements OnInit {
 
     history: UserActivity[];
     showSpinner = true;
+    noActivity: boolean;
 
     constructor(private db: DbService, private auth: AuthService, public dialog: MatDialog) {
     }
@@ -24,10 +25,12 @@ export class DatahubComponent implements OnInit {
         if (this.auth.userProfile) {
             this.history = this.db.getDatahubActivityFromUser(this.auth.userProfile.sub);
             this.showSpinner = false;
+            this.noActivity = (this.history.length === 0);
         } else {
             this.auth.getProfile((err, profile) => {
                 this.history = this.db.getDatahubActivityFromUser(profile.sub);
                 this.showSpinner = false;
+                this.noActivity = (this.history.length === 0);
             });
         }
     }

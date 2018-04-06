@@ -11,12 +11,14 @@ export class TimelineComponent implements OnInit {
     @Input() following_activity: CoActivity[];
     @Input() user_id;
 
+    noActivity : boolean;
     liked: boolean;
 
   constructor() { }
 
   ngOnInit() {
       this.liked = false;
+      this.noActivity = (this.following_activity.length === 0);
   }
 
 

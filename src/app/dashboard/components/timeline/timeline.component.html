@@ -1,5 +1,5 @@
 <div class="card-block">
-    <ul class="timeline">
+    <ul class="timeline" *ngIf="!noActivity">
         <li *ngFor="let activity of following_activity">
             <div class="timeline-panel">
                 <div class="timeline-heading">
@@ -16,5 +16,12 @@
                 </div>
             </div>
         </li>
+    </ul>
+    <h4 class="text-center" *ngIf="noActivity">Hey there, looks like your feed is empty! Here are some suggested companies to follow to get you
+        started: </h4>
+    <ul class="no-activity">
+        <li><a class="btn btn-primary btn-lg" [routerLink]="['/company-detail', 'amazon']"><b>@amazon</b></a>
+        <li><a class="btn btn-primary btn-lg" [routerLink]="['/company-detail', 'apple']"><b>@apple</b></a>
+        <li><a class="btn btn-primary btn-lg" [routerLink]="['/company-detail', 'mcdonalds']"><b>@mcdonalds</b></a>
     </ul>
 </div>

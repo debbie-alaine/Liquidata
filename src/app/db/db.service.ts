@@ -4,7 +4,6 @@ import 'rxjs/add/operator/map';
 import {Discount} from '../shared/models/discount.model';
 import {UserActivity} from '../shared/models/user_activity.model';
 import {CoActivity} from '../shared/models/co_activity.model';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class DbService {
