@@ -28,12 +28,18 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
         this.routeSub = this.route.params.subscribe(async params => {
             this.userName = params['id'];
-            const userId = await this.db.getUserId(this.userName)[0];
-            console.log('User ID: ' + userId);
-            this.userActivity = await this.db.getUserActivityByUserId(userId);
-            this.userURL = await this.db.getUserProfilePicture(userId)[0];
-            this.showSpinner = false;
+            await this.db.getUserId(this.userName, callback => this.onReceiveId(callback));
         });
+    }
+
+    onReceiveId(id: string) {
+        this.db.getUserActivityByUserId(id).then(activity => {
+            this.userActivity = activity;
+        });
+        this.db.getUserProfilePicture(id).then(url => {
+            this.userURL = url[0];
+        });
+        this.showSpinner = false;
     }
 
     ngOnDestroy() {

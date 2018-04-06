@@ -1,3 +1,4 @@
+///<reference path="../db/db.service.ts"/>
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { routerTransition} from '../router.animations';
 import { DbService } from '../db/db.service';
@@ -24,12 +25,18 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.routeSub = this.route.params.subscribe( async params => {
             this.companyName = params['id'];
-            const companyId = await this.db.getCompanyId(this.companyName)[0];
-            console.log('Company ID: ' + companyId);
-            this.companyActivity = await this.db.getCompanyActivityByCompanyId(companyId);
-            this.companyURL = await this.db.getCompanyProfilePicture(companyId)[0];
-            this.showSpinner = false;
-            });
+            await this.db.getCompanyId(this.companyName, callback => this.onReceiveId(callback));
+        });
+    }
+
+    onReceiveId(id: string) {
+        this.db.getCompanyActivityByCompanyId(id).then(activity => {
+            this.companyActivity = activity;
+        });
+        this.db.getCompanyProfilePicture(id).then(url => {
+            this.companyURL = url[0];
+        });
+        this.showSpinner = false;
     }
 
     ngOnDestroy() {

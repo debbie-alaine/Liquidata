@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import {Discount} from '../shared/models/discount.model';
 import {UserActivity} from '../shared/models/user_activity.model';
 import {CoActivity} from '../shared/models/co_activity.model';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class DbService {
@@ -65,7 +66,6 @@ export class DbService {
 
     // For Profile Page: all Company activity
     async getCompanyActivityByCompanyId(company_id) {
-        console.log('id is ' + company_id);
         const company_activity = [];
         const company_history = this.db.database.ref().child('/company/' + company_id + '/discounts');
         const discounts = this.db.database.ref().child('/discounts');
@@ -86,26 +86,20 @@ export class DbService {
         return company_activity;
     }
 
-    getUserId(username) {
-        const results = [];
+    async getUserId(username, callback) {
         const users = this.db.database.ref().child('/users');
 
         users.orderByChild('username').equalTo(username).on('child_added', snapshot => {
-            results.push(snapshot.key);
+            callback(snapshot.key);
         });
-
-        return results;
     }
 
-     getCompanyId(username) {
-        const results = [];
+     async getCompanyId(username, callback) {
         const companies = this.db.database.ref().child('/company');
 
-        companies.orderByChild('username').equalTo(username).on('child_added', snapshot => {
-            results.push(snapshot.key);
+         companies.orderByChild('username').equalTo(username).on('child_added', snapshot => {
+             callback(snapshot.key);
         });
-
-        return results;
     }
 
     async searchByCompany(searchValue: string) {
@@ -219,7 +213,7 @@ export class DbService {
         return following_activity;
     }
 
-    getCompanyProfilePicture(company_id) {
+    async getCompanyProfilePicture(company_id) {
         const result = [];
         const url = this.db.database.ref().child('/company/' + company_id + '/profile_pic');
 
@@ -230,7 +224,7 @@ export class DbService {
         return result;
     }
 
-    getUserProfilePicture(userId) {
+    async getUserProfilePicture(userId) {
         const result = [];
         const url = this.db.database.ref().child('/users/' + userId + '/profile_pic');
 
