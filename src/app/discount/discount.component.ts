@@ -14,7 +14,6 @@ export class DiscountComponent implements OnInit {
 
     discounts: Discount[];
     showSpinner = true;
-    noActivity: boolean;
 
     constructor(private db: DbService, private auth: AuthService) {
     }
@@ -22,14 +21,20 @@ export class DiscountComponent implements OnInit {
     ngOnInit() {
         if (this.auth.userProfile) {
             this.discounts = this.db.getCompletedDiscountsFromUser(this.auth.userProfile.sub);
-            this.showSpinner = false;
-            this.noActivity = (this.discounts.length === 0);
+            this.removeSpinner();
         } else {
             this.auth.getProfile((err, profile) => {
                 this.discounts = this.db.getCompletedDiscountsFromUser(profile.sub);
-                this.showSpinner = false;
-                this.noActivity = (this.discounts.length === 0);
+                this.removeSpinner();
             });
+        }
+    }
+
+    removeSpinner() {
+        if (this.discounts.length === 0) {
+            setTimeout(cb => { this.showSpinner = false}, 300)
+        } else {
+            this.showSpinner = false;
         }
     }
 }

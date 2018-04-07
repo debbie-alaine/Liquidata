@@ -14,7 +14,6 @@ export class HistoryComponent implements OnInit {
 
     history: UserActivity[];
     showSpinner = true;
-    noActivity: boolean;
 
     constructor(private db: DbService, private auth: AuthService) {
     }
@@ -22,14 +21,20 @@ export class HistoryComponent implements OnInit {
     ngOnInit() {
         if (this.auth.userProfile) {
             this.history = this.db.getHistoryFromUser(this.auth.userProfile.sub);
-            this.showSpinner = false;
-            this.noActivity = (this.history.length === 0);
+            this.removeSpinner();
         } else {
             this.auth.getProfile((err, profile) => {
                 this.history = this.db.getHistoryFromUser(profile.sub);
-                this.showSpinner = false;
-                this.noActivity = (this.history.length === 0);
+                this.removeSpinner();
             });
+        }
+    }
+
+    removeSpinner() {
+        if (this.history.length === 0) {
+            setTimeout(cb => { this.showSpinner = false}, 300)
+        } else {
+            this.showSpinner = false;
         }
     }
 }

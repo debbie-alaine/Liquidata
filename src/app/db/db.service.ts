@@ -184,7 +184,7 @@ export class DbService {
 
     // For Dashboard Page: All company activity a user follows
     // TODO: sort by timestamp
-    getFollowingActivityFromUser(user_id): CoActivity[] {
+     getFollowingActivityFromUser(user_id): CoActivity[] {
         const following_activity = [];
         const co_following = this.db.database.ref().child('/users/' + user_id + '/co_following');
         const discounts = this.db.database.ref().child('/discounts');

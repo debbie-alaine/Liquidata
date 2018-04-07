@@ -21,16 +21,23 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         if (this.auth.userProfile) {
-            this.showSpinner = true;
             this.profile = this.auth.userProfile;
             this.following_activity = this.db.getFollowingActivityFromUser(this.auth.userProfile.sub);
-            this.showSpinner = false;
+            this.removeSpinner();
         } else {
             this.auth.getProfile((err, profile) => {
                 this.profile = profile;
-                this.following_activity = this.db.getFollowingActivityFromUser(profile.sub);
-                this.showSpinner = false;
+                this.following_activity = this.db.getFollowingActivityFromUser(this.profile.sub);
+                this.removeSpinner();
             });
+        }
+    }
+
+    removeSpinner() {
+        if (this.following_activity.length === 0) {
+            setTimeout(cb => { this.showSpinner = false}, 350)
+        } else {
+            this.showSpinner = false;
         }
     }
 }

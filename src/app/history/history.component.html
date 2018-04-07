@@ -7,8 +7,8 @@
                 <div class="spinner" *ngIf="showSpinner">
                     <app-loading></app-loading>
                 </div>
-                <div class="card-block table-responsive" *ngIf="!showSpinner && !noActivity">
-                    <table class="table table-hover table-striped">
+                <div class="card-block table-responsive" *ngIf="!showSpinner">
+                    <table class="table table-hover table-striped" *ngIf="(history.length !== 0)">
                         <thead>
                         <tr>
                             <th>Company</th>
@@ -26,9 +26,8 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="card-block table-responsive" *ngIf="noActivity">
-                    <table class="table table-hover table-striped">
+                    <table class="table table-hover table-striped" *ngIf="(history.length === 0)">
+                        <img class="company-logo" src="assets/images/logo3.png"/>
                         <h4 class="text-center">You don't have any history...</h4>
                         <h4 class="text-center">Follow and like a company's post to get started!</h4>
                     </table>
