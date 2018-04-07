@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
 
     removeSpinner() {
         if (this.following_activity.length === 0) {
-            setTimeout(cb => { this.showSpinner = false}, 350)
+            setTimeout(cb => { this.showSpinner = false}, 400)
         } else {
             this.showSpinner = false;
         }

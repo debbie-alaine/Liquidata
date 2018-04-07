@@ -21,7 +21,8 @@
                         <a [routerLink]="['/company-detail', company]">
                             <b>@{{company}}</b>
                         </a>
-                        <button class="btn-primary">Follow</button>
+                        <button *ngIf="!(following.indexOf(company) > -1)" #elem id="followed" class="btn btn-primary" (click)="followClick(elem.id, company)">Follow</button>
+                        <button *ngIf="(following.indexOf(company) > -1)" #elem id="not-followed" class="btn btn-primary" (click)="followClick(elem.id, company)">Followed <i class="fa fa-check"></i></button>
                     </td>
                 </tr>
                 </tbody>

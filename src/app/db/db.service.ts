@@ -250,12 +250,18 @@ export class DbService {
     unfollowCompany(company_id: string, user_id: string) {
         const companies = this.db.database.ref().child('/users/' + user_id + '/co_following/');
 
-        companies.on('child_added', id => {
-            if (company_id === id.val()) {
-                const key = id.key;
-                console.log(id.key);
-                companies.ref.child(key).remove();
-            }
+        companies.once('value', id => {
+            id.forEach(snapshot => {
+                if (company_id === snapshot.val()) {
+                    companies.ref.child(snapshot.key).remove(function(error) {
+                        if (error) {
+                            console.log('Data could not be removed.' + error);
+                        } else {
+                            console.log('Data removed successfully.');
+                        }});
+                }
+                return false;
+            });
         });
 
     }
@@ -263,7 +269,12 @@ export class DbService {
     followCompany(company_id: string, user_id: string) {
         const companies = this.db.database.ref().child('/users/' + user_id + '/co_following/');
 
-        companies.push( company_id);
-        console.log('FOLLOWED!');
+        companies.push( company_id, function(error) {
+            if (error) {
+                console.log('Data could not be saved.' + error);
+            } else {
+                console.log('Data saved successfully.');
+            }
+        });
     }
 }

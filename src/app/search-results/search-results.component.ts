@@ -2,6 +2,7 @@ import {Component, OnChanges, OnDestroy, OnInit} from '@angular/core';
 import { routerTransition} from '../router.animations';
 import { DbService } from '../db/db.service';
 import {ActivatedRoute} from '@angular/router';
+import {AuthService} from '../auth/auth.service';
 
 @Component({
   selector: 'app-search-results',
@@ -11,27 +12,29 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
 
-    companies: string[];
-    users: string[];
+    profile: any;
+    companies = [];
+    users = [];
     showSpinner = true;
     private routeSub: any;
     private searchValue: string;
+    following = [];
 
-    constructor(private route: ActivatedRoute, private db: DbService) {
-        this.routeSub = this.route.queryParams.subscribe(params => {
+    constructor(private route: ActivatedRoute, private db: DbService, private auth: AuthService) {
+        this.routeSub = this.route.queryParams.subscribe(async params => {
             this.searchValue = params['value'];
 
-            this.db.searchByCompany(this.searchValue).then(
-                (results) => {
-                    this.companies = results;
-                }
-            );
-
-            this.db.searchByUser(this.searchValue).then(
-                (results) => {
-                    this.users = results;
-                }
-            );
+            if (this.auth.userProfile) {
+                this.profile = this.auth.userProfile;
+                await this.db.getFollowingCompanies(this.auth.userProfile.sub, callback => this.updateIsFollowed(callback));
+                this.search();
+            } else {
+                this.auth.getProfile(async (err, profile) => {
+                    this.profile = profile;
+                    await this.db.getFollowingCompanies(this.profile.sub, callback => this.updateIsFollowed(callback));
+                    this.search();
+                });
+            }
         });
     }
 
@@ -41,6 +44,37 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.routeSub.unsubscribe();
+    }
+
+    updateIsFollowed(companies: string[]) {
+        this.following = companies;
+    }
+
+    search() {
+        this.db.searchByCompany(this.searchValue).then(
+            (results) => {
+                this.companies = results;
+            }
+        );
+
+        this.db.searchByUser(this.searchValue).then(
+            (results) => {
+                this.users = results;
+            }
+        );
+    }
+
+    followClick(idElement, companyName) {
+       this.db.getCompanyId(companyName, callback => {
+            const element = document.getElementById(idElement);
+            if (element.innerText === 'Follow') {
+                element.innerHTML = 'Followed <i class="fa fa-check"></i>';
+                this.db.followCompany(callback, this.profile.sub);
+            } else {
+                element.innerHTML = 'Follow';
+                this.db.unfollowCompany(callback, this.profile.sub);
+            }
+        });
     }
 
 }

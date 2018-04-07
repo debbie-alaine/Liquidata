@@ -18,7 +18,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     public companyName: string;
     public companyURL: string;
     public companyId: string;
-    private companyActivity: CoActivity[];
+    public companyActivity: CoActivity[];
     showSpinner = true;
     following = [];
     profile: any;
