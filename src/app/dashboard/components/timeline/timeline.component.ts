@@ -27,5 +27,4 @@ export class TimelineComponent implements OnInit {
               element.innerHTML = 'Like <i class="fa fa-thumbs-o-up"></i>';
           }
   }
-
 }

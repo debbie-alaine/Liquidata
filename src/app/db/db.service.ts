@@ -233,4 +233,37 @@ export class DbService {
 
         return result;
     }
+
+    async getFollowingCompanies(user_id, callback) {
+        const following = [];
+        const co_following = this.db.database.ref().child('/users/' + user_id + '/co_following');
+        const company = this.db.database.ref().child('/company');
+
+        co_following.on('child_added', company_id => {
+            company.child(company_id.val()).once('value', company_detail => {
+                following.push(company_detail.val().username);
+            });
+        });
+        callback(following);
+    }
+
+    unfollowCompany(company_id: string, user_id: string) {
+        const companies = this.db.database.ref().child('/users/' + user_id + '/co_following/');
+
+        companies.on('child_added', id => {
+            if (company_id === id.val()) {
+                const key = id.key;
+                console.log(id.key);
+                companies.ref.child(key).remove();
+            }
+        });
+
+    }
+
+    followCompany(company_id: string, user_id: string) {
+        const companies = this.db.database.ref().child('/users/' + user_id + '/co_following/');
+
+        companies.push( company_id);
+        console.log('FOLLOWED!');
+    }
 }

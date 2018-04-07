@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
         } else {
             this.auth.getProfile((err, profile) => {
                 this.profile = profile;
-                this.db.getUserActivityByUserId(this.auth.userProfile.sub).then(activity => {
+                this.db.getUserActivityByUserId(this.profile.sub).then(activity => {
                         this.discount_activity = activity;
                         this.showSpinner = false;
                     }
