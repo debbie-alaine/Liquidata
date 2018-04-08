@@ -10,5 +10,6 @@ export class AppComponent {
 
     constructor(public auth: AuthService) {
         auth.handleAuthentication();
+        document.body.style.background = 'GhostWhite';
     }
 }

@@ -247,6 +247,19 @@ export class DbService {
         callback(following);
     }
 
+    async getFollowingUsers(user_id, callback) {
+        const following = [];
+        const user_following = this.db.database.ref().child('/users/' + user_id + '/user_following');
+        const users = this.db.database.ref().child('/users');
+
+        user_following.on('child_added', uid => {
+            users.child(uid.val()).once('value', user_detail => {
+                following.push(user_detail.val().username);
+            });
+        });
+        callback(following);
+    }
+
     unfollowCompany(company_id: string, user_id: string) {
         const companies = this.db.database.ref().child('/users/' + user_id + '/co_following/');
 

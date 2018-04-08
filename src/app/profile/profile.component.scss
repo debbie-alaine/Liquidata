@@ -48,3 +48,8 @@ li {
     width: 100%;
     z-index: 999;
 }
+
+ul.following > li{
+    display: inline;
+    padding-left: 10px;
+}
