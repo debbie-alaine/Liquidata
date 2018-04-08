@@ -290,4 +290,35 @@ export class DbService {
             }
         });
     }
+
+    unfollowUser(user_id: string, other_user_id: string) {
+    const users = this.db.database.ref().child('/users/' + user_id + '/user_following/');
+
+        users.once('value', id => {
+            id.forEach(snapshot => {
+                if (other_user_id === snapshot.val()) {
+                    users.ref.child(snapshot.key).remove(function(error) {
+                        if (error) {
+                            console.log('Data could not be removed.' + error);
+                        } else {
+                            console.log('Data removed successfully.');
+                        }});
+                }
+                return false;
+            });
+        });
+
+    }
+
+    followUser(user_id: string, other_user_id: string) {
+        const users = this.db.database.ref().child('/users/' + user_id + '/user_following/');
+
+        users.push(other_user_id, function(error) {
+            if (error) {
+                console.log('Data could not be saved.' + error);
+            } else {
+                console.log('Data saved successfully.');
+            }
+        });
+    }
 }
