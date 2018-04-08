@@ -52,6 +52,5 @@ export class ProfileComponent implements OnInit {
 
     updateUserFollowing(users: string[]) {
         this.user_following = users;
-        console.log(this.user_following);
     }
 }

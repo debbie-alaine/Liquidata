@@ -21,8 +21,8 @@
                         <a [routerLink]="['/company-detail', company]">
                             <b>@{{company}}</b>
                         </a>
-                        <button *ngIf="!(following.indexOf(company) > -1)" #elem id="followed" class="btn btn-primary" (click)="followClick(elem.id, company)">Follow</button>
-                        <button *ngIf="(following.indexOf(company) > -1)" #elem id="not-followed" class="btn btn-primary" (click)="followClick(elem.id, company)">Followed <i class="fa fa-check"></i></button>
+                        <button *ngIf="!(company_following.indexOf(company) > -1)" #elem id="co-followed" class="btn btn-primary" (click)="followClick(elem.id, company)">Follow</button>
+                        <button *ngIf="(company_following.indexOf(company) > -1)" #elem id="co-not-followed" class="btn btn-primary" (click)="followClick(elem.id, company)">Followed <i class="fa fa-check"></i></button>
                     </td>
                 </tr>
                 </tbody>
@@ -42,7 +42,8 @@
                         <a [routerLink]="['/user-detail', user]">
                             <b>@{{user}}</b>
                         </a>
-                        <button class="btn-primary">Follow</button>
+                        <button *ngIf="!(user_following.indexOf(user) > -1)" #elem id="user-followed" class="btn btn-primary" (click)="followClick(elem.id, user)">Follow</button>
+                        <button *ngIf="(user_following.indexOf(user) > -1)" #elem id="user-not-followed" class="btn btn-primary" (click)="followClick(elem.id, user)">Followed <i class="fa fa-check"></i></button>
                     </td>
                 </tr>
                 </tbody>

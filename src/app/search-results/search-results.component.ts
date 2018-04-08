@@ -18,7 +18,8 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     showSpinner = true;
     private routeSub: any;
     private searchValue: string;
-    following = [];
+    company_following = [];
+    user_following = []
 
     constructor(private route: ActivatedRoute, private db: DbService, private auth: AuthService) {
         this.routeSub = this.route.queryParams.subscribe(async params => {
@@ -26,12 +27,14 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
             if (this.auth.userProfile) {
                 this.profile = this.auth.userProfile;
-                await this.db.getFollowingCompanies(this.auth.userProfile.sub, callback => this.updateIsFollowed(callback));
+                await this.db.getFollowingCompanies(this.auth.userProfile.sub, callback => this.updateCompanyFollowing(callback));
+                await this.db.getFollowingUsers(this.auth.userProfile.sub, callback => this.updateUserFollowing(callback));
                 this.search();
             } else {
                 this.auth.getProfile(async (err, profile) => {
                     this.profile = profile;
-                    await this.db.getFollowingCompanies(this.profile.sub, callback => this.updateIsFollowed(callback));
+                    await this.db.getFollowingCompanies(this.profile.sub, callback => this.updateCompanyFollowing(callback));
+                    await this.db.getFollowingUsers(this.auth.userProfile.sub, callback => this.updateUserFollowing(callback));
                     this.search();
                 });
             }
@@ -46,8 +49,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         this.routeSub.unsubscribe();
     }
 
-    updateIsFollowed(companies: string[]) {
-        this.following = companies;
+    updateCompanyFollowing(following: string[]) {
+        this.company_following = following;
+    }
+
+    updateUserFollowing(following: string[]) {
+        this.user_following = following;
     }
 
     search() {

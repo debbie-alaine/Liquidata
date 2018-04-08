@@ -27,7 +27,7 @@
             <div class="card-header">Companies You Follow</div>
             <ul class="following">
                 <li *ngFor="let company of company_following">
-                    <button class="btn-primary">@{{company}}</button>
+                    <button [routerLink]="['/company-detail', company]" class="btn-primary">@{{company}}</button>
                 </li>
             </ul>
         </div>
@@ -35,7 +35,7 @@
             <div class="card-header">Users You Follow</div>
             <ul class="following">
                 <li *ngFor="let user of user_following">
-                    <button class="btn-success">@{{user}}</button>
+                    <button [routerLink]="['/user-detail', user]" class="btn-success">@{{user}}</button>
                 </li>
             </ul>
         </div>

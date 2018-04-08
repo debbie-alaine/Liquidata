@@ -19,7 +19,9 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     private userId: string;
     private userActivity: UserActivity[];
     showSpinner = true;
-    following = [];
+    company_following = [];
+    user_following = [];
+    following = []; // is current user following?
     profile: any;
 
     constructor(private route: ActivatedRoute, private db: DbService, private router: Router,
@@ -34,20 +36,19 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         this.routeSub = this.route.params.subscribe(async params => {
             this.userName = params['id'];
             await this.db.getUserId(this.userName, callback => this.onReceiveId(callback));
-            if (this.auth.userProfile) {
-                this.profile = this.auth.userProfile;
-                await this.db.getFollowingUsers(this.auth.userProfile.sub, callback => this.updateIsFollowed(callback));
-            } else {
-                this.auth.getProfile(async (err, profile) => {
-                    this.profile = profile;
-                    await this.db.getFollowingUsers(this.profile.sub, callback => this.updateIsFollowed(callback));
-                });
-            }
         });
     }
 
-    updateIsFollowed(users: string[]) {
-        this.following = users;
+    updateIsFollowed(following: string[]) {
+        this.following = following;
+    }
+
+    updateCompanyFollowed(company: string[]) {
+        this.company_following = company;
+    }
+
+    updateUserFollowed(users: string[]) {
+        this.user_following = users;
     }
 
     onReceiveId(id: string) {
@@ -58,6 +59,19 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         this.db.getUserProfilePicture(id).then(url => {
             this.userURL = url[0];
         });
+        if (this.auth.userProfile) {
+            this.profile = this.auth.userProfile;
+            this.db.getFollowingUsers(this.auth.userProfile.sub, callback => this.updateIsFollowed(callback));
+            this.db.getFollowingCompanies(this.userId, callback => this.updateCompanyFollowed(callback));
+            this.db.getFollowingUsers(this.userId, callback => this.updateUserFollowed(callback));
+        } else {
+            this.auth.getProfile(async (err, profile) => {
+                this.profile = profile;
+                this.db.getFollowingUsers(this.profile.sub, callback => this.updateIsFollowed(callback));
+                this.db.getFollowingCompanies(this.userId, callback => this.updateCompanyFollowed(callback));
+                this.db.getFollowingUsers(this.userId, callback => this.updateUserFollowed(callback));
+            });
+        }
         this.showSpinner = false;
     }
 
