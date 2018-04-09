@@ -321,4 +321,51 @@ export class DbService {
             }
         });
     }
+
+    likePost(user_id: string, discount_id) {
+        const users = this.db.database.ref().child('/users/' + user_id + '/discounts/');
+        const like_json = {
+                'code': 'pending',
+                'discount_id': discount_id,
+                'status': 'Applied',
+                'timestamp': Date.now()
+            };
+
+        users.push(like_json, function(error) {
+            if (error) {
+                console.log('Data could not be saved.' + error);
+            } else {
+                console.log('Data saved successfully.');
+            }
+        });
+    }
+
+    unlikePost(user_id: string, discount_id) {
+        const users = this.db.database.ref().child('/users/' + user_id + '/discounts/');
+
+        users.once('value', id => {
+            id.forEach(snapshot => {
+                if (discount_id === snapshot.val().discount_id) {
+                    users.ref.child(snapshot.key).remove(function(error) {
+                        if (error) {
+                            console.log('Data could not be removed.' + error);
+                        } else {
+                            console.log('Data removed successfully.');
+                        }});
+                }
+                return false;
+            });
+        });
+    }
+
+    getDiscountsFromUser(user_id): UserActivity[] {
+        const history = [];
+        const user_history = this.db.database.ref().child('/users/' + user_id + '/discounts');
+
+        user_history.on('child_added', activity => {
+                    history.push(activity.val().discount_id);
+        });
+
+        return history;
+    }
 }
