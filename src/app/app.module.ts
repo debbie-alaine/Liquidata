@@ -18,8 +18,8 @@ import { MaterialModule } from './shared/components';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
 import { FormsModule } from '@angular/forms';
 import {UserDetailComponent} from './user-detail/user-detail.component';
-import {DialogDatahubComponent} from './shared/components/dialog-datahub/dialog-datahub.component';
-import {DialogTimelineComponent} from './shared/components/dialog-timeline/dialog-timeline.component';
+import {DialogDatahubComponent} from './shared/components';
+import {DialogTimelineComponent} from './shared/components';
 
 @NgModule({
     declarations: [
@@ -27,7 +27,7 @@ import {DialogTimelineComponent} from './shared/components/dialog-timeline/dialo
         DialogDatahubComponent,
         DialogTimelineComponent,
         CompanyDetailComponent,
-        UserDetailComponent,
+        UserDetailComponent
     ],
     imports: [
         HttpClientModule,
@@ -54,7 +54,7 @@ import {DialogTimelineComponent} from './shared/components/dialog-timeline/dialo
     providers: [
         AuthService,
         AuthGuardService,
-        DbService
+        DbService,
     ],
     entryComponents: [DialogDatahubComponent, DialogTimelineComponent]
 })

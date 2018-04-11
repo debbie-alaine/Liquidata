@@ -7,9 +7,9 @@ import {
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { TimelineComponent } from './components';
-import {HeaderModule} from '../shared/components/header/header.module';
+import { HeaderModule } from '../shared/components/header/header.module';
 import { LoadingModule } from '../shared/components/loading/loading.module';
-import {TimeAgoPipe} from 'time-ago-pipe';
+import {SharedPipesModule} from '../shared';
 
 @NgModule({
     imports: [
@@ -18,9 +18,10 @@ import {TimeAgoPipe} from 'time-ago-pipe';
         NgbAlertModule.forRoot(),
         DashboardRoutingModule,
         HeaderModule,
-        LoadingModule
+        LoadingModule,
+        SharedPipesModule
     ],
-    declarations: [DashboardComponent, TimelineComponent, TimeAgoPipe]
+    declarations: [DashboardComponent, TimelineComponent]
 })
 export class DashboardModule {
     constructor() { }

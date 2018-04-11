@@ -5,13 +5,15 @@ import { HistoryRoutingModule } from './history-routing.module';
 import { HistoryComponent } from './history.component';
 import {HeaderModule} from '../shared/components/header/header.module';
 import { LoadingModule } from '../shared/components/loading/loading.module';
+import {SharedPipesModule} from '../shared';
 
 @NgModule({
   imports: [
     CommonModule,
     HistoryRoutingModule,
       HeaderModule,
-      LoadingModule
+      LoadingModule,
+      SharedPipesModule
   ],
   declarations: [
       HistoryComponent

@@ -282,10 +282,6 @@ export class DbService {
     followCompany(company_id: string, user_id: string) {
         const companies = this.db.database.ref().child('/users/' + user_id + '/co_following/');
 
-        console.log('company: ' + company_id);
-
-        console.log('user: ' + user_id);
-
         companies.push( company_id, function(error) {
             if (error) {
                 console.log('Data could not be saved.' + error);

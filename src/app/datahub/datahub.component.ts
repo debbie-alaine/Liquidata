@@ -5,6 +5,7 @@ import { DbService } from '../db/db.service';
 import { UserActivity } from '../shared/models/user_activity.model';
 import { MatDialog } from '@angular/material/dialog';
 import {DialogDatahubComponent} from '../shared/components/dialog-datahub/dialog-datahub.component';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 @Component({
   selector: 'app-datahub',

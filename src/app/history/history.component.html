@@ -14,15 +14,17 @@
                             <th>Company</th>
                             <th>Coupon Description</th>
                             <th>Status</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let activity of history">
+                        <tr *ngFor="let activity of history.reverse()">
                             <td><a [routerLink]="['/company-detail', activity.discount_company]">
                                 @{{activity.discount_company}}</a>
                             </td>
                             <td>{{activity.discount_description}}</td>
                             <td>{{activity.status}}</td>
+                            <td>{{activity.timestamp | timeAgo}}</td>
                         </tr>
                         </tbody>
                     </table>

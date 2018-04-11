@@ -7,6 +7,7 @@ import { DatahubRoutingModule } from './datahub-routing.module';
 import { DatahubComponent } from './datahub.component';
 import { HeaderModule } from '../shared/components/header/header.module';
 import {LoadingModule} from '../shared/components/loading/loading.module';
+import {SharedPipesModule} from '../shared';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import {LoadingModule} from '../shared/components/loading/loading.module';
         NgbAlertModule.forRoot(),
         DatahubRoutingModule,
         HeaderModule,
-        LoadingModule
+        LoadingModule,
+        SharedPipesModule
     ],
     declarations: [
         DatahubComponent

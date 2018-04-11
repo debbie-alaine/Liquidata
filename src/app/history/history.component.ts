@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { routerTransition } from '../router.animations';
 import {AuthService} from '../auth/auth.service';
 import {UserActivity} from '../shared/models/user_activity.model';
