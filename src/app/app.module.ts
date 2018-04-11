@@ -14,16 +14,18 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { DbService } from './db/db.service'
 import { environment } from '../environments/environment';
-import { DialogComponent } from './shared/components';
 import { MaterialModule } from './shared/components';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
 import { FormsModule } from '@angular/forms';
 import {UserDetailComponent} from './user-detail/user-detail.component';
+import {DialogDatahubComponent} from './shared/components/dialog-datahub/dialog-datahub.component';
+import {DialogTimelineComponent} from './shared/components/dialog-timeline/dialog-timeline.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        DialogComponent,
+        DialogDatahubComponent,
+        DialogTimelineComponent,
         CompanyDetailComponent,
         UserDetailComponent,
     ],
@@ -54,7 +56,7 @@ import {UserDetailComponent} from './user-detail/user-detail.component';
         AuthGuardService,
         DbService
     ],
-    entryComponents: [DialogComponent]
+    entryComponents: [DialogDatahubComponent, DialogTimelineComponent]
 })
 
 export class AppModule {

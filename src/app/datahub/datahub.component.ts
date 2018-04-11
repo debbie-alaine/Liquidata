@@ -3,8 +3,8 @@ import { routerTransition} from '../router.animations';
 import { AuthService } from '../auth/auth.service';
 import { DbService } from '../db/db.service';
 import { UserActivity } from '../shared/models/user_activity.model';
-import { DialogComponent} from '../shared/components';
 import { MatDialog } from '@angular/material/dialog';
+import {DialogDatahubComponent} from '../shared/components/dialog-datahub/dialog-datahub.component';
 
 @Component({
   selector: 'app-datahub',
@@ -33,8 +33,8 @@ export class DatahubComponent implements OnInit {
     }
 
     openDialog(dataPlatform) {
-        this.dialog.open(DialogComponent, {
-            data: { dataPlatform: dataPlatform }
+        this.dialog.open(DialogDatahubComponent, {
+            data: { data_platform: dataPlatform }
             });
     }
 

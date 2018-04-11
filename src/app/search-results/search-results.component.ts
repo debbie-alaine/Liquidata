@@ -19,7 +19,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     private routeSub: any;
     private searchValue: string;
     company_following = [];
-    user_following = []
+    user_following = [];
 
     constructor(private route: ActivatedRoute, private db: DbService, private auth: AuthService) {
         this.routeSub = this.route.queryParams.subscribe(async params => {
@@ -71,7 +71,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
         );
     }
 
-    followClick(idElement, companyName) {
+    followClickCompany(idElement, companyName) {
        this.db.getCompanyId(companyName, callback => {
             const element = document.getElementById(idElement);
             if (element.innerText === 'Follow') {
@@ -80,6 +80,19 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
             } else {
                 element.innerHTML = 'Follow';
                 this.db.unfollowCompany(callback, this.profile.sub);
+            }
+        });
+    }
+
+    followClickUser(idElement, userName) {
+        this.db.getUserId(userName, callback => {
+            const element = document.getElementById(idElement);
+            if (element.innerText === 'Follow') {
+                element.innerHTML = 'Followed <i class="fa fa-check"></i>';
+                this.db.followUser(this.profile.sub, callback);
+            } else {
+                element.innerHTML = 'Follow';
+                this.db.unfollowUser(this.profile.sub, callback);
             }
         });
     }

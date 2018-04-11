@@ -282,6 +282,10 @@ export class DbService {
     followCompany(company_id: string, user_id: string) {
         const companies = this.db.database.ref().child('/users/' + user_id + '/co_following/');
 
+        console.log('company: ' + company_id);
+
+        console.log('user: ' + user_id);
+
         companies.push( company_id, function(error) {
             if (error) {
                 console.log('Data could not be saved.' + error);
@@ -289,6 +293,8 @@ export class DbService {
                 console.log('Data saved successfully.');
             }
         });
+
+        return(companies);
     }
 
     unfollowUser(user_id: string, other_user_id: string) {
@@ -363,7 +369,14 @@ export class DbService {
         const user_history = this.db.database.ref().child('/users/' + user_id + '/discounts');
 
         user_history.on('child_added', activity => {
-                    history.push(activity.val().discount_id);
+            history.push(activity.val().discount_id);
+        });
+
+        user_history.on('child_removed', activity => {
+            const index = history.indexOf(activity.val().discount_id, 0);
+            if (index > -1) {
+                history.splice(index, 1);
+            }
         });
 
         return history;

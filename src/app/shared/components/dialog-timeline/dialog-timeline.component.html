@@ -1,29 +1,25 @@
-<div *ngIf="data.data_platform === 'Facebook'">
-    <h1 mat-dialog-title>Confirm data submission to {{dataPlatform}}:</h1>
-    <ul mat-dialog-content>
-        <li>Birthdays</li>
-        <li>Liked Pages</li>
-    </ul>
-
+<div *ngIf="data.isLiked">
+    <h1 mat-dialog-title>Confirm application to discount offer:</h1>
+    <p> Submit {{data.data_desc}} on {{data.data_platform }} for {{data.coupon_desc}}.</p>
 
     <div mat-dialog-actions>
-        <button mat-button (click)="facebook_login()" color="primary">
-            Agree
+        <button class="btn btn-primary" (click)="confirm()" color="primary">
+            Apply
         </button>
-        <button mat-button (click)="dialogRef.close()">
+        <button class="btn btn-outline-primary" (click)="dialogRef.close()">
             Cancel
         </button>
     </div>
 </div>
-<div *ngIf="!dataPlatform === 'Facebook'">
-    <h1 mat-dialog-title>Confirm application to {{data.discount_company}}:</h1>
-    <p> Submit {{data.data_desc}} on {{data.data_platform }} for {{data.coupon_desc}}</p>
-
+<div *ngIf="!data.isLiked">
+    <h1 mat-dialog-title>Withdraw application to discount offer:</h1>
+    <p> Submit {{data.data_desc}} on {{data.data_platform }} for {{data.coupon_desc}}.</p>
+    <p style="color: red"> All data will be removed. </p>
     <div mat-dialog-actions>
-        <button mat-button (click)="confirm()" color="primary">
-            Agree
+        <button class="btn btn-primary" (click)="confirm()" color="primary">
+            Withdraw
         </button>
-        <button mat-button (click)="dialogRef.close()">
+        <button class="btn btn-outline-primary" (click)="dialogRef.close()">
             Cancel
         </button>
     </div>

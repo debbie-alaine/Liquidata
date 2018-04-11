@@ -6,15 +6,14 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
     selector: 'app-dialog',
-    templateUrl: './dialog.component.html',
-    styleUrls: ['./dialog.component.scss'],
+    templateUrl: './dialog-datahub.component.html',
+    styleUrls: ['./dialog-datahub.component.scss'],
     providers: [FacebookService]
 })
-export class DialogComponent {
+export class DialogDatahubComponent {
 
-    constructor(public dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+    constructor(public dialogRef: MatDialogRef<DialogDatahubComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
                 private fb: FacebookService) {
-        console.log(data);
     }
 
     facebook_login() {
@@ -33,10 +32,5 @@ export class DialogComponent {
 
         this.dialogRef.close();
     }
-
-    // confirm() {
-    //     this.facebook_login();
-    //     this.dialogRef.close();
-    // }
 
 }

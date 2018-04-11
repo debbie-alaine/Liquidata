@@ -1,8 +1,9 @@
-import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {CoActivity} from '../../../shared/models/co_activity.model';
-import {Observable} from 'rxjs/Observable';
 import {DbService} from '../../../db/db.service';
 import {AuthService} from '../../../auth/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import {DialogTimelineComponent} from '../../../shared/components/dialog-timeline/dialog-timeline.component';
 
 @Component({
   selector: 'app-timeline',
@@ -14,9 +15,8 @@ export class TimelineComponent implements OnInit {
     @Input() following_activity: CoActivity[];
     userId: string;
     discounts = [];
-    like1 = 'Like <i class="fa fa-thumbs-o-up"></i>';
 
-  constructor(private db: DbService, private auth: AuthService) { }
+  constructor(private db: DbService, private auth: AuthService, public dialog: MatDialog) { }
 
   ngOnInit() {
       if (this.auth.userProfile) {
@@ -29,18 +29,34 @@ export class TimelineComponent implements OnInit {
           })}
   }
 
-  isLiked(discount_id, idElement) {
+  isLiked(activity, idElement) {
       const element = document.getElementById(idElement);
-      const like = 'Like <i class="fa fa-thumbs-o-up"></i>';
-      const liked = 'Liked <i class="fa fa-thumbs-up"></i>';
 
-      if (element.innerHTML === like) {
-               element.innerHTML = liked;
-              this.db.likePost(this.userId, discount_id)
+      if (element.innerText === 'Like ') {
+              this.dialog.open(DialogTimelineComponent, {
+                  data: {
+                      user_id: this.userId,
+                      discount_id: activity.discount_id,
+                      coupon_desc: activity.coupon_desc,
+                      data_desc: activity.data_desc,
+                      discount_company: activity.discount_company,
+                      data_platform: activity.data_platform,
+                      isLiked: true
+                  }
+              });
 
           } else {
-              element.innerHTML = like;
-              this.db.unlikePost(this.userId, discount_id)
-          }
+          this.dialog.open(DialogTimelineComponent, {
+              data: {
+                  user_id: this.userId,
+                  discount_id: activity.discount_id,
+                  coupon_desc: activity.coupon_desc,
+                  data_desc: activity.data_desc,
+                  discount_company: activity.discount_company,
+                  data_platform: activity.data_platform,
+                  isLiked: false
+              }
+          });
+      }
   }
 }

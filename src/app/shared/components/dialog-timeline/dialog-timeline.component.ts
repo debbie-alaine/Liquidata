@@ -3,40 +3,29 @@ import {Component, Inject} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {FacebookService, InitParams, LoginResponse} from 'ngx-facebook';
 import {MAT_DIALOG_DATA} from '@angular/material';
+import {DbService} from '../../../db/db.service';
 
 @Component({
     selector: 'app-dialog',
     templateUrl: './dialog-timeline.component.html',
-    styleUrls: ['./dialog.component.scss'],
+    styleUrls: ['./dialog-timeline.component.scss'],
     providers: [FacebookService]
 })
-export class DialogComponent {
+export class DialogTimelineComponent {
 
-    constructor(public dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-                private fb: FacebookService) {
-        console.log(data);
+    constructor(public dialogRef: MatDialogRef<DialogTimelineComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+                private db: DbService) {
     }
 
-    facebook_login() {
-            const initParams: InitParams = {
-                appId: environment.facebook.appId,
-                xfbml: false,
-                version: 'v2.12'
-            };
+    confirm() {
+        if (this.data.isLiked) {
+            this.db.likePost(this.data.user_id, this.data.discount_id)
 
-            this.fb.init(initParams);
-            console.log('Facebook Initiated!')
-
-            this.fb.login()
-                .then((response: LoginResponse) => console.log('Logged in', response))
-                .catch(e => console.error('Error logging in'));
+        } else {
+            this.db.unlikePost(this.data.user_id, this.data.discount_id)
+        }
 
         this.dialogRef.close();
     }
-
-    // confirm() {
-    //     this.facebook_login();
-    //     this.dialogRef.close();
-    // }
 
 }

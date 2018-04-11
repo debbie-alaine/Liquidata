@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {DialogComponent} from './dialog-datahub.component';
+import {DialogDatahubComponent} from './dialog-datahub.component';
 
 describe('DialogComponent', () => {
-    let component: DialogComponent;
-    let fixture: ComponentFixture<DialogComponent>;
+    let component: DialogDatahubComponent;
+    let fixture: ComponentFixture<DialogDatahubComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ DialogComponent ]
+            declarations: [ DialogDatahubComponent ]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(DialogComponent);
+        fixture = TestBed.createComponent(DialogDatahubComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
