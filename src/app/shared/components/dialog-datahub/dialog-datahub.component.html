@@ -15,6 +15,27 @@
         </button>
     </div>
 </div>
+<div *ngIf="data.data_platform != 'Facebook' && !isSuccess">
+    <h1 mat-dialog-title>Confirm data submission to {{data.data_platform}}:</h1>
+
+
+    <div *ngIf="isLoading" class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+
+    <div *ngIf="!isLoading" mat-dialog-actions>
+        <button class="btn btn-primary" (click)="other_login()" color="primary">
+            Agree
+        </button>
+        <button class="btn btn-outline-primary" (click)="dialogRef.close()">
+            Cancel
+        </button>
+    </div>
+</div>
 <div *ngIf="isSuccess">
     <h4> Data submission was successful! </h4>
 

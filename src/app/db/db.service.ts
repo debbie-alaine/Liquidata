@@ -332,6 +332,10 @@ export class DbService {
                 'status': 'Applied',
                 'timestamp': Date.now()
             };
+        const discount_json = {
+            'code': 'pending',
+            'status': 'Approved',
+        };
 
         users.push(like_json, function(error) {
             if (error) {
@@ -339,6 +343,16 @@ export class DbService {
             } else {
                 console.log('Data saved successfully.');
             }
+        }).then(d_id => {
+            setTimeout(() => {
+                console.log('done waiting...' + d_id);
+                d_id.update(discount_json, function(er) {
+                    if (er) {
+                        console.log('Data could not be saved.' + er);
+                    } else {
+                        console.log('Data saved successfully.');
+                    }});
+            }, 5000);
         });
     }
 

@@ -67,3 +67,8 @@ li {
     margin: 10px 15px 10px auto;
     text-align: right;
 }
+
+ul.following > li{
+    display: inline;
+    padding-left: 10px;
+}

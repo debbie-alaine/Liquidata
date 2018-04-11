@@ -12,10 +12,12 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 })
 export class DialogDatahubComponent {
     isSuccess: boolean;
+    isLoading: boolean;
 
     constructor(public dialogRef: MatDialogRef<DialogDatahubComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
                 private fb: FacebookService) {
         this.isSuccess = false;
+        this.isLoading = false;
     }
 
     facebook_login() {
@@ -37,6 +39,14 @@ export class DialogDatahubComponent {
                     this.isSuccess = true;
                 })
                 .catch(e => console.error('Error logging in'));
+    }
+
+    other_login() {
+        this.isLoading = true;
+        setTimeout(() => {
+            this.isSuccess = true;
+            this.isLoading = false;
+        }, 2000);
     }
 
     ok() {
