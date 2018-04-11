@@ -16,26 +16,37 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 export class DatahubComponent implements OnInit {
 
     history: UserActivity[];
+    submitted: string[];
     showSpinner = true;
+    userId: string;
 
     constructor(private db: DbService, private auth: AuthService, public dialog: MatDialog) {
     }
 
     ngOnInit() {
         if (this.auth.userProfile) {
-            this.history = this.db.getDatahubActivityFromUser(this.auth.userProfile.sub);
+            this.userId = this.auth.userProfile.sub;
+            this.history = this.db.getDatahubActivityFromUser(this.userId);
+            this.submitted = this.db.submitListener(this.userId);
             this.removeSpinner();
         } else {
             this.auth.getProfile((err, profile) => {
-                this.history = this.db.getDatahubActivityFromUser(profile.sub);
+                this.userId = profile.sub;
+                this.history = this.db.getDatahubActivityFromUser(this.userId);
+                this.submitted = this.db.submitListener(this.userId);
                 this.removeSpinner();
             });
         }
     }
 
-    openDialog(dataPlatform) {
+    openDialog(dataPlatform, discount_id, elementId) {
+        const element = document.getElementById(elementId);
         this.dialog.open(DialogDatahubComponent, {
-            data: { data_platform: dataPlatform }
+            data: { data_platform: dataPlatform,
+                    user_id: this.userId,
+                    discount_id: discount_id,
+                    element: element
+            }
             });
     }
 

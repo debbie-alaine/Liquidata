@@ -3,6 +3,7 @@ import {Component, Inject} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {FacebookService, InitParams, LoginResponse} from 'ngx-facebook';
 import {MAT_DIALOG_DATA} from '@angular/material';
+import {DbService} from '../../../db/db.service';
 
 @Component({
     selector: 'app-dialog',
@@ -15,7 +16,7 @@ export class DialogDatahubComponent {
     isLoading: boolean;
 
     constructor(public dialogRef: MatDialogRef<DialogDatahubComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-                private fb: FacebookService) {
+                private fb: FacebookService, private db: DbService) {
         this.isSuccess = false;
         this.isLoading = false;
     }
@@ -28,14 +29,12 @@ export class DialogDatahubComponent {
             };
 
             this.fb.init(initParams);
-            console.log('Facebook Initiated!')
+            console.log('Facebook Initiated!');
 
             this.fb.login()
                 .then((response: LoginResponse) => {
-                    console.log('Logged in', response);
                     // DO SOMETHING WITH DATA
                     this.fb.logout();
-                    console.log('Logging out');
                     this.isSuccess = true;
                 })
                 .catch(e => console.error('Error logging in'));
@@ -50,6 +49,7 @@ export class DialogDatahubComponent {
     }
 
     ok() {
+        this.db.submitData(this.data.user_id, this.data.discount_id);
         this.dialogRef.close();
         this.isSuccess = false;
     }

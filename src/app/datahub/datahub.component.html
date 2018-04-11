@@ -26,8 +26,10 @@
                             <td>{{activity.discount_description}}
                             <td>{{activity.data_description}}</td>
                             <td>{{activity.data_platform}}</td>
-                            <td><button mat-raised-button (click)="openDialog(activity.data_platform)" color="primary">
-                                Submit Data
+                            <td><button mat-raised-button class="btn btn-primary"
+                                        (click)="openDialog(activity.data_platform, activity.discount_id)"
+                            [disabled]="(submitted.indexOf(activity.discount_id) > -1)">
+                               {{(submitted.indexOf(activity.discount_id) > -1) ? 'Submitted' : "Submit Data"}}
                             </button></td>
                         </tr>
                         </tbody>

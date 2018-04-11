@@ -178,8 +178,20 @@ export class DbService {
             });
         });
 
-
         return datahub_activity;
+    }
+
+    submitListener(user_id) {
+        const user_history = this.db.database.ref().child('/users/' + user_id + '/discounts');
+        const submitted = [];
+
+        user_history.on('child_changed', activity => {
+            if (activity.val().status === 'Data Submitted') {
+                submitted.push(activity.val().discount_id);
+            }
+        });
+
+        return submitted;
     }
 
     // For Dashboard Page: All company activity a user follows
@@ -327,14 +339,15 @@ export class DbService {
     likePost(user_id: string, discount_id) {
         const users = this.db.database.ref().child('/users/' + user_id + '/discounts/');
         const like_json = {
-                'code': 'pending',
+                'code': 'Pending',
                 'discount_id': discount_id,
                 'status': 'Applied',
                 'timestamp': Date.now()
             };
         const discount_json = {
-            'code': 'pending',
+            'code': 'Pending',
             'status': 'Approved',
+            'timestamp': Date.now()
         };
 
         users.push(like_json, function(error) {
@@ -344,15 +357,15 @@ export class DbService {
                 console.log('Data saved successfully.');
             }
         }).then(d_id => {
-            setTimeout(() => {
-                console.log('done waiting...' + d_id);
+            // setTimeout(() => {
+            //     console.log('done waiting...' + d_id);
                 d_id.update(discount_json, function(er) {
                     if (er) {
                         console.log('Data could not be saved.' + er);
                     } else {
                         console.log('Data saved successfully.');
                     }});
-            }, 5000);
+            // }, 5000);
         });
     }
 
@@ -390,5 +403,30 @@ export class DbService {
         });
 
         return history;
+    }
+
+    submitData(user_id, discount_id) {
+        const discounts = this.db.database.ref().child('/users/' + user_id + '/discounts/');
+
+        const submitted_json = {
+            'code': 'Pending',
+            'status': 'Data Submitted',
+            'timestamp': Date.now()
+        };
+
+        discounts.once('value', id => {
+            id.forEach(snapshot => {
+                if (discount_id === snapshot.val().discount_id) {
+                    discounts.ref.child(snapshot.key).update(submitted_json, function (error) {
+                        if (error) {
+                            console.log('Data could not be removed.' + error);
+                        } else {
+                            console.log('Data saved successfully.');
+                        }
+                    });
+                }
+                return false;
+            });
+        });
     }
 }
