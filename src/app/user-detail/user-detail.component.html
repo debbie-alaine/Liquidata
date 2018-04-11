@@ -16,15 +16,22 @@
         </div>
         <div class="card-block mb-3" *ngIf="!showSpinner">
             <div class="card-header">Recent Activity</div>
-            <ul>
-                <li *ngFor="let activity of userActivity">
-                    <p> @{{userName}}
+            <table style="margin: 0px" class="table table-hover table-striped">
+                <tr *ngFor="let activity of userActivity">
+                    <div class="row">
+                    <p class="activity"> @{{userName}}
                         {{activity.status === 'Approved' ? "received" : "applied to" }}
                         <u>{{activity.discount_description}}</u> offer from
                         <a [routerLink]="['/company-detail', activity.discount_company]">@{{activity.discount_company}}</a>.
                     </p>
-                </li>
-            </ul>
+                    <a *ngIf="!(discounts.indexOf(activity.discount_id) > -1)" #elem id="1{{activity.discount_id}}"
+                       class="like-button" href="javascript:void(0)" (click)="isLiked(activity, elem.id)">Like <i class="fa fa-thumbs-o-up"></i></a>
+                    <a *ngIf="(discounts.indexOf(activity.discount_id) > -1)" #elem id="2{{activity.discount_id}}"
+                       class="like-button" href="javascript:void(0)" (click)="isLiked(activity, elem.id)">Liked <i class="fa fa-thumbs-up"></i></a>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div class="card-block mb-3" *ngIf="!showSpinner">
             <div class="card-header">Companies They Follow</div>

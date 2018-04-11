@@ -11,9 +11,11 @@ import {MAT_DIALOG_DATA} from '@angular/material';
     providers: [FacebookService]
 })
 export class DialogDatahubComponent {
+    isSuccess: boolean;
 
     constructor(public dialogRef: MatDialogRef<DialogDatahubComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
                 private fb: FacebookService) {
+        this.isSuccess = false;
     }
 
     facebook_login() {
@@ -27,10 +29,19 @@ export class DialogDatahubComponent {
             console.log('Facebook Initiated!')
 
             this.fb.login()
-                .then((response: LoginResponse) => console.log('Logged in', response))
+                .then((response: LoginResponse) => {
+                    console.log('Logged in', response);
+                    // DO SOMETHING WITH DATA
+                    this.fb.logout();
+                    console.log('Logging out');
+                    this.isSuccess = true;
+                })
                 .catch(e => console.error('Error logging in'));
+    }
 
+    ok() {
         this.dialogRef.close();
+        this.isSuccess = false;
     }
 
 }

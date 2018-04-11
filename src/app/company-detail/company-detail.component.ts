@@ -5,6 +5,8 @@ import { DbService } from '../db/db.service';
 import {ActivatedRoute} from '@angular/router';
 import {CoActivity} from '../shared/models/co_activity.model';
 import {AuthService} from '../auth/auth.service';
+import {DialogTimelineComponent} from '../shared/components/dialog-timeline/dialog-timeline.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-company-detail',
@@ -21,9 +23,10 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     public companyActivity: CoActivity[];
     showSpinner = true;
     following = [];
+    discounts = [];
     profile: any;
 
-    constructor(private route: ActivatedRoute, private db: DbService, private auth: AuthService) {
+    constructor(private route: ActivatedRoute, private db: DbService, private auth: AuthService, public dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -33,10 +36,12 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
             if (this.auth.userProfile) {
                 this.profile = this.auth.userProfile;
                 await this.db.getFollowingCompanies(this.auth.userProfile.sub, callback => this.updateIsFollowed(callback));
+                this.discounts = this.db.getDiscountsFromUser(this.profile.sub);
             } else {
                 this.auth.getProfile(async (err, profile) => {
                     this.profile = profile;
                     await this.db.getFollowingCompanies(this.profile.sub, callback => this.updateIsFollowed(callback));
+                    this.discounts = this.db.getDiscountsFromUser(this.profile.sub);
                 });
             }
         });
@@ -69,6 +74,37 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
         } else {
             element.innerHTML = 'Follow';
             this.db.unfollowCompany(this.companyId, this.profile.sub);
+        }
+    }
+
+    isLiked(activity, idElement) {
+        const element = document.getElementById(idElement);
+
+        if (element.innerText === 'Like ') {
+            this.dialog.open(DialogTimelineComponent, {
+                data: {
+                    user_id: this.profile.sub,
+                    discount_id: activity.discount_id,
+                    coupon_desc: activity.coupon_desc,
+                    data_desc: activity.data_desc,
+                    discount_company: activity.discount_company,
+                    data_platform: activity.data_platform,
+                    isLiked: true
+                }
+            });
+
+        } else {
+            this.dialog.open(DialogTimelineComponent, {
+                data: {
+                    user_id: this.profile.sub,
+                    discount_id: activity.discount_id,
+                    coupon_desc: activity.coupon_desc,
+                    data_desc: activity.data_desc,
+                    discount_company: activity.discount_company,
+                    data_platform: activity.data_platform,
+                    isLiked: false
+                }
+            });
         }
     }
 }

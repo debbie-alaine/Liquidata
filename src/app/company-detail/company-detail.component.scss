@@ -49,3 +49,21 @@ li {
     width: 100%;
     z-index: 999;
 }
+
+.row {
+    width: 100%;
+    margin: 0 auto;
+    clear: both;
+}
+
+.activity {
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+}
+
+.like-button{
+    margin: 10px 15px 10px auto;
+    text-align: right;
+}

@@ -1,4 +1,4 @@
-<div *ngIf="data.data_platform === 'Facebook'">
+<div *ngIf="data.data_platform === 'Facebook' && !isSuccess">
     <h1 mat-dialog-title>Confirm data submission to {{data.data_platform}}:</h1>
     <ul mat-dialog-content>
         <li>Birthdays</li>
@@ -12,6 +12,15 @@
         </button>
         <button class="btn btn-outline-primary" (click)="dialogRef.close()">
             Cancel
+        </button>
+    </div>
+</div>
+<div *ngIf="isSuccess">
+    <h4> Data submission was successful! </h4>
+
+    <div mat-dialog-actions>
+        <button class="btn btn-primary" (click)="ok()" color="primary">
+            Ok
         </button>
     </div>
 </div>

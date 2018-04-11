@@ -15,11 +15,21 @@
         </div>
         <div class="card-block mb-3" *ngIf="!showSpinner">
             <div class="card-header">Recent Activity</div>
-            <ul>
-                <li *ngFor="let activity of companyActivity">
-                    <p>Submit {{activity.data_desc}} on {{activity.data_platform }} for {{activity.coupon_desc}}.</p>
-                </li>
-            </ul>
+            <table class="table table-hover table-striped">
+                <tbody>
+                <tr *ngFor="let activity of companyActivity">
+                <div class="row">
+                    <p class="activity">Submit {{activity.data_desc}} on {{activity.data_platform }} for {{activity.coupon_desc}}.</p>
+                    <a *ngIf="!(discounts.indexOf(activity.discount_id) > -1)" #elem id="1{{activity.discount_id}}"
+                       class="like-button"
+                       href="javascript:void(0)" (click)="isLiked(activity, elem.id)">Like <i class="fa fa-thumbs-o-up"></i></a>
+                    <a *ngIf="(discounts.indexOf(activity.discount_id) > -1)" #elem id="2{{activity.discount_id}}"
+                       class="like-button"
+                       href="javascript:void(0)" (click)="isLiked(activity, elem.id)">Liked <i class="fa fa-thumbs-up"></i></a>
+                </div>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
