@@ -18,7 +18,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr *ngFor="let activity of history.reverse()">
+                        <tr *ngFor="let activity of history">
                             <td><a [routerLink]="['/company-detail', activity.discount_company]">
                                 @{{activity.discount_company}}</a>
                             </td>

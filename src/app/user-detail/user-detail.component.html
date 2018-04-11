@@ -9,9 +9,9 @@
             <img class="card-img" src={{userURL}}>
         </div>
         <div class="card-block" *ngIf="!showSpinner">
-            <button class="btn btn-secondary" disabled>@{{userName}}</button>
-            <button *ngIf="!(following.indexOf(userName) > -1)" #elem id="followed" class="btn btn-primary" (click)="followClick(elem.id)">Follow</button>
-            <button *ngIf="(following.indexOf(userName) > -1)" #elem id="not-followed" class="btn btn-primary" (click)="followClick(elem.id)">Followed <i class="fa fa-check"></i></button>
+            <button class="btn btn-secondary profile-btn" disabled>@{{userName}}</button>
+            <button *ngIf="!(following.indexOf(userName) > -1)" #elem id="followed" class="btn btn-primary profile-btn" (click)="followClick(elem.id)">Follow</button>
+            <button *ngIf="(following.indexOf(userName) > -1)" #elem id="not-followed" class="btn btn-primary profile-btn" (click)="followClick(elem.id)">Followed <i class="fa fa-check"></i></button>
 
         </div>
         <div class="card-block mb-3" *ngIf="!showSpinner">
@@ -37,15 +37,15 @@
             <div class="card-header">Companies They Follow</div>
             <ul class="following">
                 <li *ngFor="let company of company_following">
-                    <button [routerLink]="['/company-detail', company]" class="btn-primary">@{{company}}</button>
+                    <button [routerLink]="['/company-detail', company]" class="btn btn-primary">@{{company}}</button>
                 </li>
             </ul>
         </div>
         <div class="card-block mb-3" *ngIf="!showSpinner">
-            <div class="card-header">Users The Follow</div>
+            <div class="card-header">Users They Follow</div>
             <ul class="following">
                 <li *ngFor="let user of user_following">
-                    <button [routerLink]="['/user-detail', user]" class="btn-success">@{{user}}</button>
+                    <button [routerLink]="['/user-detail', user]" class="btn btn-success">@{{user}}</button>
                 </li>
             </ul>
         </div>
