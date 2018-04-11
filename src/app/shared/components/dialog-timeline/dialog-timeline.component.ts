@@ -6,17 +6,18 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
     selector: 'app-dialog',
-    templateUrl: './dialog.component.html',
+    templateUrl: './dialog-timeline.component.html',
     styleUrls: ['./dialog.component.scss'],
     providers: [FacebookService]
 })
 export class DialogComponent {
 
     constructor(public dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-                private fb: FacebookService) { }
+                private fb: FacebookService) {
+        console.log(data);
+    }
 
-    login(dataPlatform) {
-        if (dataPlatform === 'Facebook') {
+    facebook_login() {
             const initParams: InitParams = {
                 appId: environment.facebook.appId,
                 xfbml: false,
@@ -29,12 +30,13 @@ export class DialogComponent {
             this.fb.login()
                 .then((response: LoginResponse) => console.log('Logged in', response))
                 .catch(e => console.error('Error logging in'));
-        }
-    }
 
-    confirm() {
-        this.login(this.data.dataPlatform);
         this.dialogRef.close();
     }
+
+    // confirm() {
+    //     this.facebook_login();
+    //     this.dialogRef.close();
+    // }
 
 }

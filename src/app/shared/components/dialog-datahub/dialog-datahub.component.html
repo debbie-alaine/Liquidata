@@ -1,0 +1,30 @@
+<div *ngIf="data.data_platform === 'Facebook'">
+    <h1 mat-dialog-title>Confirm data submission to {{dataPlatform}}:</h1>
+    <ul mat-dialog-content>
+        <li>Birthdays</li>
+        <li>Liked Pages</li>
+    </ul>
+
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="facebook_login()" color="primary">
+            Agree
+        </button>
+        <button mat-button (click)="dialogRef.close()">
+            Cancel
+        </button>
+    </div>
+</div>
+<div *ngIf="!dataPlatform === 'Facebook'">
+    <h1 mat-dialog-title>Confirm application to {{data.discount_company}}:</h1>
+    <p> Submit {{data.data_desc}} on {{data.data_platform }} for {{data.coupon_desc}}</p>
+
+    <div mat-dialog-actions>
+        <button mat-button (click)="confirm()" color="primary">
+            Agree
+        </button>
+        <button mat-button (click)="dialogRef.close()">
+            Cancel
+        </button>
+    </div>
+</div>
