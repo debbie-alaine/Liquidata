@@ -1,6 +1,9 @@
 <nav class="navbar navbar-toggleable-md navbar-expand-lg fixed-top" [ngStyle]="navStyle">
     <img class="navbar-brand" src="./assets/images/logo2.png"/>
-    <button class="btn btn-primary" (click)="login()"> <i class="fa fa-lock"></i> Log In </button>
+    <div class="login-buttons">
+        <button class="btn btn-primary user-btn" (click)="login()"> <i class="fa fa-lock"></i> Log In </button>
+        <button class="btn btn-primary company-btn" [routerLink]="['/company']" > <i class="fa fa-lock"></i> Company </button>
+    </div>
 </nav>
 <div class="placeholder">
     <div class="bg">

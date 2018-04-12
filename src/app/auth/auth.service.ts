@@ -18,7 +18,8 @@ export class AuthService {
 
     userProfile: any;
 
-    constructor(public router: Router) {}
+    constructor(public router: Router) {
+    }
 
     public login(): void {
         this.auth0.authorize();

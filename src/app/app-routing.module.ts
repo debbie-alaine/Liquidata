@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
 import { CompanyDetailComponent } from './company-detail/company-detail.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import {CompanyHomeComponent} from './company-home/company-home.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full', canActivate: [AuthGuard]},
@@ -16,6 +17,9 @@ const routes: Routes = [
     { path: 'user-detail/:id', component: UserDetailComponent, canActivate: [AuthGuard]},
     { path: 'search', loadChildren: './search-results/search-results.module#SearchResultsModule', canActivate: [AuthGuard] },
     { path: 'profile', loadChildren: './profile/profile.module#ProfileModule', canActivate: [AuthGuard] },
+    { path: 'company', loadChildren: './company-home/company-home.module#CompanyHomeModule' },
+    { path: 'request', loadChildren: './company-request/company-request.module#CompanyRequestModule' },
+    { path: 'company-dashboard', loadChildren: './company-dashboard/company-dashboard.module#CompanyDashboardModule'},
     { path: '**', redirectTo: 'not-found' }
 ];
 

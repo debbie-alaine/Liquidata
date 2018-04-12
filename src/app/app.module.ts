@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 import {DialogDatahubComponent} from './shared/components';
 import {DialogTimelineComponent} from './shared/components';
+import { CompanyHomeComponent } from './company-home/company-home.component';
+import {CompanyHeaderModule} from './shared/company-header/company-header.module';
 
 @NgModule({
     declarations: [
@@ -36,6 +38,7 @@ import {DialogTimelineComponent} from './shared/components';
         MaterialModule,
         AppRoutingModule,
         HeaderModule,
+        CompanyHeaderModule,
         LoadingModule,
         CollapseModule.forRoot(),
         JwtModule.forRoot({

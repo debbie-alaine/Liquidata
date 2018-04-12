@@ -95,9 +95,18 @@
     }
 }
 
-.btn {
-    position: absolute;
-    right: 20px;
-    font-size: 12px;
+.login-buttons {
+    width: 100%;
+    float: right;
+    clear: none;
+}
+
+.company-btn{
+    float: right;
+}
+
+.user-btn {
+    float: right;
+    margin-left: 10px;
 }
 

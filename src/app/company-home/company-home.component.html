@@ -1,0 +1,31 @@
+<app-company-header></app-company-header>
+<div class="company-home" [@routerTransition]>
+    <div class="card mb-3 main-card">
+        <div class="card-header">Your Profile</div>
+        <div class="spinner" *ngIf="showSpinner">
+            <app-loading></app-loading>
+        </div>
+        <div class="image-cropper" *ngIf="!showSpinner">
+            <img class="card-img" src={{profile?.picture}}>
+        </div>
+        <div class="card-block" *ngIf="!showSpinner">
+            <button class="btn btn-secondary profile-btn" disabled>@{{profile?.nickname}}</button>
+        </div>
+        <div class="card-block mb-3" *ngIf="!showSpinner">
+            <div class="card-header">Recent Activity</div>
+            <table style="margin: 0px" class="table table-hover table-striped">
+                <tbody>
+                <tr>
+                    <p>Send us top 25 songs from Spotify for 25% off your next meal.</p>
+                </tr>
+                <tr>
+                    <p>Send us most recently watched shows on Netflix and recieve a free Happy Meal.</p>
+                </tr>
+                <tr>
+                    <p>Send us your most recent purchase history on Amazon and receive 30% off your next meal.</p>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
