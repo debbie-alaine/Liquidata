@@ -357,15 +357,15 @@ export class DbService {
                 console.log('Data saved successfully.');
             }
         }).then(d_id => {
-            // setTimeout(() => {
-            //     console.log('done waiting...' + d_id);
+            setTimeout(() => {
+                console.log('done waiting...' + d_id);
                 d_id.update(discount_json, function(er) {
                     if (er) {
                         console.log('Data could not be saved.' + er);
                     } else {
                         console.log('Data saved successfully.');
                     }});
-            // }, 5000);
+            }, 5000);
         });
     }
 
