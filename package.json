@@ -46,6 +46,7 @@
     "express-session": "^1.15.6",
     "firebase": "^4.9.1",
     "font-awesome": "^4.7.0",
+    "hoek": "^5.0.3",
     "jquery": "^3.3.1",
     "jwks-rsa": "^1.2.1",
     "mysql": "^2.15.0",
@@ -59,6 +60,7 @@
     "request": "^2.83.0",
     "rxjs": "^5.5.6",
     "sequelize": "^4.31.2",
+    "ssri": "^6.0.0",
     "time-ago-pipe": "^1.2.1",
     "zone.js": "^0.8.17"
   },
